@@ -17,7 +17,7 @@ const LASTFM_API_KEY = "";
 
 const MB_HEADERS: HeadersInit = {
   Accept: "application/json",
-  "User-Agent": "MyMusicApp/1.0 ", //need to work further
+  "User-Agent": "MyMusicApp/1.0 ", //need to work further (email)
 };
 
 const sleep = (ms: number): Promise<void> =>
