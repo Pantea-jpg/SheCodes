@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/search.css" />
+    <script type="module" src="./scripts/search.js"></script>
+    <script type="module" src="./scripts/general.js"></script>
+
+    <title>searchPage</title>
+  </head>
+  <body>
+    <main>
+      <header class="header">
+        <div class="logo">
+          <img src="./assets/logo1.png" alt="Music Match Logo" />
+        </div>
+        <nav>
+          <a id="login" href="#">Uitloggen</a>
+          <a id="learn-more" href="#">Leer meer</a>
+        </nav>
+      </header>
+      <section class="filter-search">
+        <div class="search-container">
+          <form>
+            <label for="mySearch"></label>
+            <input
+              type="search"
+              name="search"
+              id="mySearch"
+              value=""
+              placeholder="Zoek naar artiest of nummer"
+            />
+            <button class="searchButton" type="submit">Zoeken</button>
+          </form>
+        </div>
+        <div id="filter-container">
+          <button class="tracksbutton active">Nummers</button>
+          <button class="artistsbutton">Artiesten</button><b></b>
+        </div>
+      </section>
+      <div id="loginModal" class="modal">
+        <button class="close-1">×</button>
+        <div class="modal-content">
+          <h2 id="login-h2">Inloggen</h2>
+          <div id="error-success"></div>
+          <div>
+            <label for="username">Gebruikersnaam</label>
+            <input
+              type="text"
+              placeholder="bv. gebruiker.123@ap.be"
+              id="username"
+            />
+          </div>
+          <div>
+            <label for="password">Wachtwoord</label>
+            <input type="password" placeholder="bv. 123" id="password" />
+          </div>
+          <div class="buttons">
+            <button class="login-button">Inloggen</button>
+            <button class="register-button">Registreren</button>
+          </div>
+        </div>
+      </div>
+      <div class="access-denied">
+        <button class="close-2">×</button>
+        <div class="access-denied-content">
+          U hebt geen toegang tot dit project!
+        </div>
+      </div>
+    </main>
+    <a href="./generator.html" id="create-playlist-btn" class="playlist-btn">
+      🎧 Maak jouw afspeellijst
+    </a>
+    <div id="home-sections"></div>
+    <div id="results"></div>
+    <div id="loginModal" class="modal">
+      <button class="close-1">×</button>
+      <div class="modal-content">
+        <h2 id="login-h2">Inloggen</h2>
+        <div>
+          <label for="username">Gebruikersnaam</label>
+          <input
+            type="text"
+            placeholder="bv. gebruiker.123@ap.be"
+            id="username"
+          />
+        </div>
+        <div>
+          <label for="password">Wachtwoord</label>
+          <input type="password" placeholder="bv. 123" id="password" />
+        </div>
+        <button>Inloggen</button>
+      </div>
+    </div>
+    <div id="infoModal" class="modal">
+      <button class="close-3">×</button>
+      <div class="modal-content" id="info-content">
+        <h2>Music Match</h2>
+        <p>
+          Music Match is een platform waar je nieuwe muziek kunt ontdekken en
+          delen met anderen. Je kunt zoeken naar artiesten, nummers en albums en
+          aanbevelingen krijgen op basis van jouw smaak. Het doel van Music
+          Match is om mensen met dezelfde muzieksmaak met elkaar te verbinden en
+          hen te helpen nieuwe favoriete nummers te vinden.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

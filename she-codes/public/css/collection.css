@@ -1,0 +1,130 @@
+header {
+    background-color: var(--bg);
+    height: 80px;
+}
+
+body{
+    background-color: var(--secondary);
+    font-family: var(--main-font);
+    color: var(--text);
+}
+
+main {
+    padding: 30px;
+    margin-left: 50px;
+}
+.left {
+   display: flex;
+   justify-content: left;
+   gap: 5px;
+   align-items: center;
+}
+
+.title {
+     margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Mood {
+background-color: var(--light);
+ text-align: center;
+ margin-left: 10px;
+ font-size: 1rem;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+form {
+    background-color: var(--light);
+    border: 1px solid var(--text);
+    max-width: 300px;
+    border-radius: 10px;
+    height: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sort{
+    position:relative; 
+}
+
+
+
+select{
+  width: 100%;
+  padding: 5px 10px;
+ border-radius: 10px;
+  background: var(--light);
+  color: var(--text);
+}
+
+label {
+    padding: 2px;
+}
+
+
+
+.Songlist {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px
+}
+
+article {
+    display: flex;
+    flex-direction: row;
+   
+    gap: 10px;
+    width: 400px;
+    height: 200px;
+    background-color: var(--secondary);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+figure {
+    border-radius: 10px;
+    margin:0;
+    width: 100%;
+    height: 200px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin:0;
+}
+
+
+article button {
+    font-size: 20px;
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    left: 360px;
+}
+
+article > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+article {
+    position: relative;
+}

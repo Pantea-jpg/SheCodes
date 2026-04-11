@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/generator.css" />
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <script type="module" src="./scripts/generator.js"></script>
+    <title>generator</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="./assets/logo1.png" alt="Music Match Logo" />
+      </div>
+      <nav>
+        <a id="learn-more" href="#">Leer meer</a>
+        <a href="./searchPage.html" class="home" title="Thuis">⌂</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Afspeellijst Generator</h1>
+      <div class="mood-section">
+        <h2>stemming :</h2>
+        <button>😎 Chill</button>
+        <button>🏃Energiek</button>
+        <button>😴 Slaap</button>
+        <button>💔 Verdrietig</button>
+      </div>
+
+      <div class="genre-section">
+        <h2>Genre :</h2>
+        <button>Hip-Hop</button>
+        <button>Pop</button>
+        <button>Jazz</button>
+      </div>
+      <div class="setting-section">
+        <div class="setting select">
+          <label for="duration">Duur</label>
+          <select id="duration">
+            <option value="15">15 min</option>
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60">60 min</option>
+          </select>
+        </div>
+        <div class="setting">
+          <label for="tempo">Tempo</label>
+          <input type="range" name="tempo" id="tempo" min="0" max="100" />
+        </div>
+        <div class="setting select">
+          <label for="popularity">Populariteit</label>
+          <select name="popularity" id="popularity">
+            <option value="Trending">Trending</option>
+            <option value="Nieuw">Nieuw</option>
+            <option value="Populair">Populair</option>
+          </select>
+        </div>
+      </div>
+      <button id="open-liked">Mijn afspeellijst❤️</button>
+      <a href="./collection.html" id="myCollection">Mijn collectie</a>
+      <div class="button-title">
+        <button type="button" class="playList-generate">
+          Afspeellijst Genereren
+        </button>
+      </div>
+      <section id="playlist"></section>
+      <div id="loginModal" class="modal">
+        <button class="close-1">×</button>
+        <div class="modal-content">
+          <h2 id="login-h2">Inloggen</h2>
+          <div>
+            <label for="username">Gebruikersnaam</label>
+            <input
+              type="text"
+              placeholder="bv. gebruiker.123@ap.be"
+              id="username"
+            />
+          </div>
+          <div>
+            <label for="password">Wachtwoord</label>
+            <input type="password" placeholder="bv. 123" id="password" />
+          </div>
+          <button>Inloggen</button>
+        </div>
+      </div>
+      <div id="infoModal" class="modal">
+        <button class="close-3">×</button>
+        <div class="modal-content" id="info-content">
+          <h2>Music Match</h2>
+          <p>
+            Music Match is een platform waar je nieuwe muziek kunt ontdekken en
+            delen met anderen. Je kunt zoeken naar artiesten, nummers en albums
+            en aanbevelingen krijgen op basis van jouw smaak. Het doel van Music
+            Match is om mensen met dezelfde muzieksmaak met elkaar te verbinden
+            en hen te helpen nieuwe favoriete nummers te vinden.
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

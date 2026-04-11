@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/compare.css" />
+    <title>Let's compare</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="./assets/logo1.png" alt="Music Match Logo" />
+      </div>
+      <nav>
+        <a id="login" href="#">Inloggen</a>
+        <a id="learn-more" href="#">Leer meer</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Let's compare</h1>
+
+      <section class="comparison">
+        <div class="song">
+          <div class="songPicture"></div>
+          <h2>Song Name</h2>
+          <p>Artist</p>
+        </div>
+        <div class="vs-circle">
+          <span>VS</span>
+        </div>
+        <div class="song">
+          <div class="songPicture"></div>
+          <h2>Song Name</h2>
+          <p>Artist</p>
+        </div>
+      </section>
+
+      <section class="comparisonInfo">
+        <div class="InfoRow">
+          <span>Release</span>
+        </div>
+        <div class="InfoRow">
+          <span>Genre</span>
+        </div>
+        <div class="InfoRow">
+          <span>Total plays</span>
+        </div>
+        <div class="InfoRow">
+          <span>Rating</span>
+        </div>
+      </section>
+      <div id="loginModal" class="modal">
+        <button class="close-1">×</button>
+        <div class="modal-content">
+          <h2 id="login-h2">Inloggen</h2>
+          <div>
+            <label for="username">Gebruikersnaam</label>
+            <input
+              type="text"
+              placeholder="bv. gebruiker.123@ap.be"
+              id="username"
+            />
+          </div>
+          <div>
+            <label for="password">Wachtwoord</label>
+            <input type="password" placeholder="bv. 123" id="password" />
+          </div>
+          <button>Inloggen</button>
+        </div>
+      </div>
+      <div id="infoModal" class="modal">
+        <button class="close-3">×</button>
+        <div class="modal-content" id="info-content">
+          <h2>Music Match</h2>
+          <p>
+            Music Match is een platform waar je nieuwe muziek kunt ontdekken en
+            delen met anderen. Je kunt zoeken naar artiesten, nummers en albums
+            en aanbevelingen krijgen op basis van jouw smaak. Het doel van Music
+            Match is om mensen met dezelfde muzieksmaak met elkaar te verbinden
+            en hen te helpen nieuwe favoriete nummers te vinden.
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

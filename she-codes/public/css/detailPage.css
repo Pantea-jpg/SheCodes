@@ -1,0 +1,143 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  background: linear-gradient(180deg, #2b2f9b 0%, #0f144a 100%);
+  flex-direction: column;
+}
+
+.artist-page {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 4rem auto;
+  width: 80%;
+  max-width: 1100px;
+  color: white;
+}
+.artist-info {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+}
+.artist-image {
+  flex: 1;
+  max-width: 320px;
+  height: 330px;
+  background-color: beige;
+  border-radius: 10px;
+}
+.artist-image img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+.artist-details {
+  flex: 2;
+}
+.artist-name {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.artist-bio {
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+}
+
+.artist-genres {
+  display: flex;
+  gap: 1rem;
+}
+
+.genre-tag {
+  background: white;
+  color: black;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.top-songs-h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.top-songs {
+  display: flex;
+}
+
+.songs-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #6f8fc6 0%, #2c5aa0 100%);
+  box-shadow: 0 0 40px rgba(255, 121, 80, 0.925);
+}
+
+.song-item {
+  display: flex;
+  background: linear-gradient(180deg, #6f8fc6 0%, #2c5aa0 100%);
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1.2rem;
+  transition: 0.3s ease;
+  border-radius: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.song-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(223, 223, 223, 0.2);
+}
+.song-name {
+  flex: 2;
+  font-weight: bold;
+  color: #fff;
+}
+.album {
+  flex: 1;
+  color: #f0f0f0;
+  text-align: center;
+}
+.publication-year {
+  flex: 1;
+  color: #f0f0f0;
+  text-align: center;
+}
+.genre {
+  flex: 1;
+  color: #f0f0f0;
+  text-align: center;
+}
+.song-item:last-child {
+  border-bottom: none;
+}
+
+#back-button {
+  width: 45px;
+  border-bottom: 2px solid white;
+}
+
+/* tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .artist-info {
+    flex-direction: column;
+  }
+}
+/* mobile  */
+@media (max-width: 600px) {
+  .artist-info {
+    flex-direction: column;
+  }
+  .album {
+    display: none;
+  }
+  .genre {
+    display: none;
+  }
+}

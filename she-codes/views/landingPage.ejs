@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/landingPage.css" />
+    <script type="module" src="./scripts/general.js"></script>
+    <script type="module" src="./scripts/landingPage.js"></script>
+    <script type="module" src="./scripts/justToTest.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <!-- injaro dorost kon -->
+      <div class="logo">
+        <img src="./assets/logo1.png" alt="Music Match Logo" />
+      </div>
+      <nav>
+        <a id="login" href="#">Inloggen</a>
+        <a id="learn-more" href="#">Leer meer</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="projects-containers">
+        <section class="projects musicMatch">
+          <h1>Music Match</h1>
+          <h2>Explore and enjoy music!</h2>
+          <img
+            class="images"
+            src="./assets/musicMatchimage.png"
+            alt="Music Match Image"
+          />
+          <button>Join now!</button>
+        </section>
+        <section class="projects project-a">
+          <h1>Project A</h1>
+          <h2></h2>
+          <img
+            class="images"
+            src="./assets/otherProjects.png"
+            alt="Other Projects Image"
+          />
+          <button>Access Denied</button>
+        </section>
+        <section class="projects project-b">
+          <h1>Project B</h1>
+          <h2></h2>
+          <img
+            class="images"
+            src="./assets/otherProjects.png"
+            alt="Other Projects Image"
+          />
+          <button>Access Denied</button>
+        </section>
+      </div>
+      <div class="message">
+        <h1>Login to access all features!</h1>
+      </div>
+      <div id="loginModal" class="modal">
+        <button class="close-1">×</button>
+        <div class="modal-content">
+          <h2 id="login-h2">Inloggen</h2>
+          <div id="error-success"></div>
+          <div>
+            <label for="username">Gebruikersnaam</label>
+            <input
+              type="text"
+              placeholder="bv. gebruiker.123@ap.be"
+              id="username"
+            />
+          </div>
+          <div>
+            <label for="password">Wachtwoord</label>
+            <input type="password" placeholder="bv. 123" id="password" />
+          </div>
+          <div class="buttons">
+            <button class="login-button">Inloggen</button>
+            <button class="register-button">Registreren</button>
+          </div>
+        </div>
+      </div>
+      <div class="access-denied">
+        <button class="close-2">×</button>
+        <div class="access-denied-content">
+          U hebt geen toegang tot dit project!
+        </div>
+      </div>
+      <div id="infoModal" class="modal">
+        <button class="close-3">×</button>
+        <div class="modal-content" id="info-content">
+          <h2>Music Match</h2>
+          <p>
+            Music Match is een platform waar je nieuwe muziek kunt ontdekken en
+            delen met anderen. Je kunt zoeken naar artiesten, nummers en albums
+            en aanbevelingen krijgen op basis van jouw smaak. Het doel van Music
+            Match is om mensen met dezelfde muzieksmaak met elkaar te verbinden
+            en hen te helpen nieuwe favoriete nummers te vinden.
+          </p>
+        </div>
+      </div>
+    </main>
+    <footer class="footer"></footer>
+  </body>
+</html>
