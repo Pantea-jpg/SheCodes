@@ -7,21 +7,21 @@ const homeContainer = document.querySelector("#home-sections");
 const tracksButton = document.querySelector(".tracksbutton");
 const artistsButton = document.querySelector(".artistsbutton");
 
-let artists = [];
+// let artists = [];
 let lastSearchData = null;
 
 // 1. JSON inladen
-fetch("./json/data.json")
-  .then((res) => res.json())
-  .then((data) => {
-    artists = data;
-    renderHomeSections(); // startpagina tonen
-  })
-  .catch((err) => console.error("JSON error:", err));
+// fetch("./json/data.json")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     artists = data;
+//     renderHomeSections(); // startpagina tonen
+//   })
+//   .catch((err) => console.error("JSON error:", err));
 
 // 2. Zoeken bij submit
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   handleSearch();
 });
 

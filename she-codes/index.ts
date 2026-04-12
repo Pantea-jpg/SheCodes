@@ -1,7 +1,9 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-
+import { searchPageRouter } from "./routers/searchRouter";
+import { generatorRouter } from "./routers/generatorRouter";
+import { collectionRouter } from "./routers/collectionRouter";
 dotenv.config();
 
 const app : Express = express();
@@ -13,12 +15,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
-
+app.use("/search", searchPageRouter());
+app.use("/generator", generatorRouter());
+app.use("/collection", collectionRouter())
 app.get("/", (req, res) => {
-    res.render("index", {
-        title: "Hello World",
-        message: "Hello World"
-    })
+    res.render("landingPage")
 });
 
 app.listen(app.get("port"), () => {

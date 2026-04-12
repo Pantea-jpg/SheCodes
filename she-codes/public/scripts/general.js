@@ -13,9 +13,9 @@ const learnMore = document.querySelector("#learn-more");
 const usernameTest = "pantea@ap.be";
 const passwordTest = "1234";
 
-if (!window.location.pathname.includes("landingPage.html")) {
+if (!window.location.pathname.includes("landingPage.ejs")) {
   logo.addEventListener("click", () => {
-    window.location.href = "./searchPage.html";
+    window.location.href = "/search";
   });
 }
 
@@ -48,7 +48,7 @@ loginModalButton.addEventListener("click", () => {
     errormessage.classList.add("green");
     errormessage.textContent = "Je hebt successful ingelogd!";
     setTimeout(() => {
-      window.location.href = "./searchPage.html";
+      window.location.href = "/search";
     }, 2000);
   }
 });

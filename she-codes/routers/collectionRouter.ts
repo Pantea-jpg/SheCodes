@@ -1,14 +1,14 @@
 import express from "express";
 
 
-export function generatorRouter() {
+export function collectionRouter() {
   const router = express.Router();
 
   router.get("/", (req, res) => {
     
 
     
-    res.render("generator")
+    res.render("collection")
   });
 
   return router; 

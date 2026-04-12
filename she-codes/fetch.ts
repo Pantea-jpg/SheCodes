@@ -13,7 +13,7 @@ import {
 const MB_BASE = "https://musicbrainz.org/ws/2";
 const LFM_BASE = "https://ws.audioscrobbler.com/2.0";
 
-const LASTFM_API_KEY = "";
+const LASTFM_API_KEY = "942e772f501e11d63e84d8a750afa43e";
 
 const MB_HEADERS: HeadersInit = {
   Accept: "application/json",
