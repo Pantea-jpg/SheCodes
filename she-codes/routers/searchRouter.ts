@@ -34,12 +34,14 @@ if (!query) {
     try {
       const artists = await searchArtists(query);
       const tracks = await searchTracks(query);
+console.log(tracks)
 
       res.render("searchPage", {
         artists,
         tracks,
         query,
       });
+      
     } catch (err) {
       console.error("Search error:", err);
       res.render("searchPage", {
@@ -48,7 +50,7 @@ if (!query) {
         query,
       });
     }
+    
   });
-
   return router;
 }
