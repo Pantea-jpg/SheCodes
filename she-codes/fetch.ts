@@ -178,3 +178,42 @@ function msToTime(ms: number): string {
   const s = String(totalSec % 60).padStart(2, "0");
   return `${m}:${s}`;
 }
+export async function searchArtists(query: string) {
+  const data = await lfmFetch<{
+    results: {
+      artistmatches: {
+        artist: {
+          name: string;
+          listeners: string;
+          mbid: string;
+        }[];
+      };
+    };
+  }>({
+    method: "artist.search",
+    artist: query,
+    limit: 10,
+  });
+
+  return data.results.artistmatches.artist;
+}
+
+export async function searchTracks(query: string) {
+  const data = await lfmFetch<{
+    results: {
+      trackmatches: {
+        track: {
+          name: string;
+          artist: string;
+          mbid: string;
+        }[];
+      };
+    };
+  }>({
+    method: "track.search",
+    track: query,
+    limit: 10,
+  });
+
+  return data.results.trackmatches.track;
+}

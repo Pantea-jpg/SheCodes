@@ -210,7 +210,9 @@ main {
   transform: translateY(2px);
 }
 
-
+.result-item div{
+  color: aliceblue;
+}
 @media (min-width: 601px) and (max-width: 1024px) {
   #results {
     min-width: 500px;

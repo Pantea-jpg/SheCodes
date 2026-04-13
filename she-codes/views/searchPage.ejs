@@ -37,8 +37,12 @@
           </form>
         </div>
         <div id="filter-container">
-          <button class="tracksbutton active">Nummers</button>
-          <button class="artistsbutton">Artiesten</button><b></b>
+          <!-- <button class="tracksbutton active">Nummers</button>
+          <button class="artistsbutton">Artiesten</button><b></b> -->
+       
+  <button class="tracksbutton" id="filter-artists">Artiesten</button>
+  <button class="artistsbutton" id="filter-tracks">Nummers</button>
+
         </div>
        
       </section>
@@ -76,30 +80,35 @@
       🎧 Maak jouw afspeellijst
     </a>
     <div id="home-sections">
-      <% if (trending) { %>
-  <h2>🔥 Trending artiesten</h2>
-
-  <% trending.forEach(artist => { %>
-    <div>
-      <h3><%= artist.artist.name %></h3>
-      <img src="<%= artist.artist.imageUrl %>" width="100" />
-    </div>
-  <% }) %>
-<% } %></div>
+     </div>
     <div id="results">
-      <% if (data) { %>
-  <h2>Search Result</h2>
+      <% artists.forEach(a => { %>
+        <div class="result-item artist-item">
+       <img src="assets/default.png" class="image" />
+      <div>
+      <strong><%= a.name %></strong>
+      
+    </div>
+     <a href="/detail" class="details-btn">Details</a>
+        
+     </div>
+  <% }) %>
 
-  <h3><%= data.artist.name %></h3>
-  <img src="<%= data.artist.imageUrl %>" width="150" />
 
-  <h4>Top Tracks:</h4>
-  <ul>
-    <% data.topTracks.forEach(track => { %>
-      <li><%= track.title %></li>
-    <% }) %>
-  </ul>
-<% } %></div>
+  <% tracks.forEach(t => { %>
+    <div class="result-item track-item">
+       <img src="assets/default.png" class="image" />
+    <div>
+      <strong><%= t.name %></strong>
+      <p><%= t.artist %></p>
+    </div>
+    <a href="/detail" class="details-btn">Details</a>
+        
+     </div>
+  <% }) %>
+
+
+  </div>
     <div id="loginModal" class="modal">
       <button class="close-1">×</button>
       <div class="modal-content">
