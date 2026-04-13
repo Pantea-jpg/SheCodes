@@ -80,35 +80,53 @@
       🎧 Maak jouw afspeellijst
     </a>
     <div id="home-sections">
-     </div>
-    <div id="results">
-      <% artists.forEach(a => { %>
-        <div class="result-item artist-item">
-       <img src="assets/default.png" class="image" />
-      <div>
-      <strong><%= a.name %></strong>
-      
+      <% if (!query) { %>
+  <!-- 🔥 Trending artiesten -->
+  <h2 class="section-title">🔥 Trending artiesten</h2>
+  <div class="home-row">
+  <% artists.forEach(a => { %>
+    <div class="home-card">
+      <img src="assets/defaultArtiest.png" class="home-img round">
+      <p><%= a.name %></p>
     </div>
-     <a href="/detail" class="details-btn">Details</a>
-        
-     </div>
   <% }) %>
-
+</div>
+  <!-- 🌍 Populaire nummers -->
+  <h2 class="section-title">🌍 Populaire nummers</h2>
+      <div class="home-row">
 
   <% tracks.forEach(t => { %>
-    <div class="result-item track-item">
-       <img src="assets/default.png" class="image" />
-    <div>
-      <strong><%= t.name %></strong>
-      <p><%= t.artist %></p>
+    <div class="home-card">
+      <img src="assets/default.png" class="home-img round">
+      <p><%= t.name %></p>
     </div>
-    <a href="/detail" class="details-btn">Details</a>
-        
-     </div>
   <% }) %>
+      </div>
 
+<% } else { %>
+  <!-- 🔍 Resultaten -->
+  <h2>🔍 Resultaten voor "<%= query %>"</h2>
+  <div id="results">
+    <% artists.forEach(a => { %>
+      <div class="result-item artist-item">
+        <img src="<%= a.image %>" class="image">
+        <div><strong><%= a.name %></strong></div>
+        <a href="/detail/<%= a.id %>" class="details-btn">Details</a>
+      </div>
+    <% }) %>
 
+    <% tracks.forEach(t => { %>
+      <div class="result-item track-item">
+        <img src="<%= t.image %>" class="image">
+        <div><strong><%= t.name %></strong><p><%= t.artist %></p></div>
+        <a href="/detail/<%= t.id %>" class="details-btn">Details</a>
+      </div>
+    <% }) %>
   </div>
+<% } %>
+
+     </div>
+  
     <div id="loginModal" class="modal">
       <button class="close-1">×</button>
       <div class="modal-content">

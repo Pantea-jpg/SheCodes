@@ -178,6 +178,25 @@ function msToTime(ms: number): string {
   const s = String(totalSec % 60).padStart(2, "0");
   return `${m}:${s}`;
 }
+// export async function searchArtists(query: string) {
+//   const data = await lfmFetch<{
+//     results: {
+//       artistmatches: {
+//         artist: {
+//           name: string;
+//           listeners: string;
+//           mbid: string;
+//         }[];
+//       };
+//     };
+//   }>({
+//     method: "artist.search",
+//     artist: query,
+//     limit: 10,
+//   });
+
+//   return data.results.artistmatches.artist;
+// }
 export async function searchArtists(query: string) {
   const data = await lfmFetch<{
     results: {
@@ -186,6 +205,7 @@ export async function searchArtists(query: string) {
           name: string;
           listeners: string;
           mbid: string;
+          image?: { size: string; ["#text"]: string }[];
         }[];
       };
     };
@@ -195,9 +215,34 @@ export async function searchArtists(query: string) {
     limit: 10,
   });
 
-  return data.results.artistmatches.artist;
+  return data.results.artistmatches.artist.map(a => ({
+    id: a.mbid, // zodat <%= a.id %> werkt
+    name: a.name,
+    listeners: a.listeners,
+    image:
+      a.image?.find(i => i.size === "large")?.["#text"] ||
+      "/assets/defaultArtiest.png",
+  }));
 }
+// export async function searchTracks(query: string) {
+//   const data = await lfmFetch<{
+//     results: {
+//       trackmatches: {
+//         track: {
+//           name: string;
+//           artist: string;
+//           mbid: string;
+//         }[];
+//       };
+//     };
+//   }>({
+//     method: "track.search",
+//     track: query,
+//     limit: 10,
+//   });
 
+//   return data.results.trackmatches.track;
+// }
 export async function searchTracks(query: string) {
   const data = await lfmFetch<{
     results: {
@@ -206,6 +251,7 @@ export async function searchTracks(query: string) {
           name: string;
           artist: string;
           mbid: string;
+          image?: { size: string; ["#text"]: string }[];
         }[];
       };
     };
@@ -215,5 +261,100 @@ export async function searchTracks(query: string) {
     limit: 10,
   });
 
-  return data.results.trackmatches.track;
+  return data.results.trackmatches.track.map(t => ({
+    id: t.mbid, // zodat <%= t.id %> werkt
+    name: t.name,
+    artist: t.artist,
+    image:
+      t.image?.find(i => i.size === "large")?.["#text"] ||
+      "/assets/default.png",
+  }));
+}
+export async function getTrendingArtists(limit = 5) {
+  const data = await lfmFetch<{
+    artists: {
+      artist: {
+        name: string;
+        mbid: string;
+      }[];
+    };
+  }>({
+    method: "chart.getTopArtists",
+    limit,
+  });
+
+  return Promise.all(
+    data.artists.artist.map(async (a) => ({
+      name: a.name,
+      mbid: a.mbid,
+       image: await getArtistImage(a.mbid),
+    }))
+  );
+}
+export async function getTrendingTracks(limit = 5) {
+  const data = await lfmFetch<{
+    tracks: {
+      track: {
+        name: string;
+        artist: { name: string };
+        mbid: string;
+      }[];
+    };
+  }>({
+    method: "chart.getTopTracks",
+    limit,
+  });
+
+  return Promise.all(
+    data.tracks.track.map(async (t) => ({
+      name: t.name,
+      artist: t.artist.name,
+      mbid: t.mbid,
+       image: await getTrackImage(t.mbid),
+    }))
+  );
+}
+export async function getArtistImage(mbid: string) {
+  if (!mbid) return "/assets/defaultArtiest.png";
+
+  try {
+    const data = await lfmFetch<{
+      artist?: {
+        image?: { size: string; ["#text"]: string }[];
+      };
+    }>({
+      method: "artist.getInfo",
+      mbid,
+    });
+
+    const images = data.artist?.image;
+    const large = images?.find(img => img.size === "extralarge")?.["#text"];
+
+    return large || "/assets/defaultArtiest.png";
+  } catch {
+    return "/assets/defaultArtiest.png";
+  }
+}
+export async function getTrackImage(mbid: string) {
+  if (!mbid) return "/assets/default.png";
+
+  try {
+    // 1. Zoek release via MusicBrainz
+    const mb = await mbFetch<{
+      releases?: { id: string }[];
+    }>(`${MB_BASE}/recording/${mbid}?inc=releases&fmt=json`);
+
+    const releaseId = mb.releases?.[0]?.id;
+    if (!releaseId) return "/assets/default.png";
+
+    // 2. Haal cover op via CoverArtArchive
+    const coverUrl = `https://coverartarchive.org/release/${releaseId}/front-250`;
+
+    const res = await fetch(coverUrl);
+    if (!res.ok) return "/assets/default.png";
+
+    return coverUrl;
+  } catch {
+    return "/assets/default.png";
+  }
 }
