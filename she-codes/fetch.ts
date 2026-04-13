@@ -199,7 +199,8 @@ export async function searchArtists(query: string) {
   });
 
   return data.results.artistmatches.artist.map((a) => ({
-    id: a.mbid,
+    id: a.mbid || encodeURIComponent(a.name),
+
     name: a.name,
     listeners: a.listeners,
     image:
@@ -227,7 +228,9 @@ export async function searchTracks(query: string) {
   });
 
   return data.results.trackmatches.track.map((t) => ({
-    id: t.mbid,
+    // id: t.mbid,
+    id:encodeURIComponent(t.artist),
+
     name: t.name,
     artist: t.artist,
     image:

@@ -111,7 +111,7 @@
       <div class="result-item artist-item">
         <img src="<%= a.image %>" class="image">
         <div><strong><%= a.name %></strong></div>
-        <a href="/detail?artist=<%= encodeURIComponent(a.name) %>" class="details-btn">Details</a>
+        <a href="/detail/<%= a.id %>" class="details-btn">Details</a>
       </div>
     <% }) %>
 
@@ -119,7 +119,7 @@
       <div class="result-item track-item">
         <img src="<%= t.image %>" class="image">
         <div><strong><%= t.name %></strong><p><%= t.artist %></p></div>
-        <a href="/detail?artist=<%= encodeURIComponent(t.artist) %>" class="details-btn">Details</a>
+        <a href="/detail/<%= t.id %>" class="details-btn">Details</a>
       </div>
     <% }) %>
   </div>
