@@ -3,59 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Details</title>
-    <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/general.css" />
-    <link rel="stylesheet" href="./css/detailPage.css" />
-    <script type="module" src="./scripts/script.js"></script>
-    <script type="module" src="./scripts/general.js"></script>
-    <script type="module" src="./scripts/detailPages/detailPage1.js"></script>
+    <title><%= data.artist.name %></title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/detailPage.css" />
+    <script type="module" src="/scripts/general.js"></script>
   </head>
   <body>
     <header class="header">
       <div class="logo">
-        <img src="./assets/logo1.png" alt="Music Match Logo" />
+        <img src="/assets/logo1.png" alt="Music Match Logo" />
       </div>
       <nav>
         <a id="login" href="#">Inloggen</a>
         <a id="learn-more" href="#">Leer meer</a>
       </nav>
     </header>
+
     <main class="artist-page">
       <a href="/search" id="back-button">Terug</a>
-      <!-- dynamic data -->
-      <div id="loginModal" class="modal">
-        <button class="close-1">×</button>
-        <div class="modal-content">
-          <h2 id="login-h2">Inloggen</h2>
-          <div>
-            <label for="username">Gebruikersnaam</label>
-            <input
-              type="text"
-              placeholder="bv. gebruiker.123@ap.be"
-              id="username"
-            />
-          </div>
-          <div>
-            <label for="password">Wachtwoord</label>
-            <input type="password" placeholder="bv. 123" id="password" />
-          </div>
-          <button>Inloggen</button>
+
+
+      <section class="artist-info">
+        <% if (data.artist.imageUrl) { %>
+          <img src="<%= data.artist.imageUrl %>" alt="<%= data.artist.name %>" class="artist-img" />
+        <% } else { %>
+          <img src="/assets/defaultArtiest.png" alt="default" class="artist-img" />
+        <% } %>
+
+        <div class="artist-details">
+          <h1><%= data.artist.name %></h1>
+          <p><strong>Land:</strong> <%= data.artist.country ?? "Onbekend" %></p>
+          <p><strong>Opgericht:</strong> <%= data.artist.formed ?? "Onbekend" %></p>
+          <% if (data.artist.disbanded) { %>
+            <p><strong>Ontbonden:</strong> <%= data.artist.disbanded %></p>
+          <% } %>
+          <p><strong>Luisteraars:</strong> <%= data.artist.listeners.toLocaleString() %></p>
+          <p><strong>Tags:</strong> <%= data.artist.tags.join(", ") %></p>
+          <% if (data.artist.bio) { %>
+            <p class="bio"><%= data.artist.bio %></p>
+          <% } %>
         </div>
-      </div>
-      <div id="infoModal" class="modal">
-        <button class="close-3">×</button>
-        <div class="modal-content" id="info-content">
-          <h2>Music Match</h2>
-          <p>
-            Music Match is een platform waar je nieuwe muziek kunt ontdekken en
-            delen met anderen. Je kunt zoeken naar artiesten, nummers en albums
-            en aanbevelingen krijgen op basis van jouw smaak. Het doel van Music
-            Match is om mensen met dezelfde muzieksmaak met elkaar te verbinden
-            en hen te helpen nieuwe favoriete nummers te vinden.
-          </p>
-        </div>
-      </div>
+      </section>
+
+
+      <section class="top-tracks">
+        <h2>🎵 Top nummers</h2>
+        <ol>
+          <% data.topTracks.forEach(track => { %>
+            <li>
+              <strong><%= track.rank %>. <%= track.title %></strong>
+              — <%= parseInt(track.playCount).toLocaleString() %> plays
+            </li>
+          <% }) %>
+        </ol>
+      </section>
+
+
+      <section class="albums">
+        <h2>💿 Albums</h2>
+        <% data.albums.forEach(album => { %>
+          <div class="album-card">
+            <h3><%= album.title %></h3>
+            <p><%= album.date ?? "Datum onbekend" %> — <%= album.country ?? "" %></p>
+            <% if (album.tracks.length > 0) { %>
+              <ul>
+                <% album.tracks.forEach(track => { %>
+                  <li><%= track.position %>. <%= track.title %> <%= track.durationStr ? `(${track.durationStr})` : "" %></li>
+                <% }) %>
+              </ul>
+            <% } %>
+          </div>
+        <% }) %>
+      </section>
     </main>
   </body>
 </html>
