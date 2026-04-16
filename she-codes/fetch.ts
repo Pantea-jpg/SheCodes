@@ -179,35 +179,20 @@ function msToTime(ms: number): string {
   const s = String(totalSec % 60).padStart(2, "0");
   return `${m}:${s}`;
 }
+// Fetch search results from iTunes (image + 30s preview) for the search page
 
-export async function searchArtists(query: string) {
-  const data = await lfmFetch<{
-    results: {
-      artistmatches: {
-        artist: {
-          name: string;
-          listeners: string;
-          mbid: string;
-          image?: { size: string; ["#text"]: string }[];
-        }[];
-      };
-    };
-  }>({
-    method: "artist.search",
-    artist: query,
-    limit: 10,
-  });
+export async function getTrackImageFromiTunes(query: string) {
+  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(
+    query,
+  )}&entity=song&limit=1`;
 
-  return data.results.artistmatches.artist.map((a) => ({
-    id: a.mbid || encodeURIComponent(a.name),
+  const res = await fetch(url);
+  const data = await res.json();
 
-    name: a.name,
-    listeners: a.listeners,
-    image:
-      a.image?.find((i) => i.size === "large")?.["#text"] ||
-      "/assets/defaultArtiest.png",
-  }));
+  const track = data.results?.[0];
+  return track?.artworkUrl100 || "/assets/default.png";
 }
+
 
 export async function searchTracks(query: string) {
   const data = await lfmFetch<{
@@ -217,7 +202,6 @@ export async function searchTracks(query: string) {
           name: string;
           artist: string;
           mbid: string;
-          image?: { size: string; ["#text"]: string }[];
         }[];
       };
     };
@@ -227,37 +211,22 @@ export async function searchTracks(query: string) {
     limit: 10,
   });
 
-  return data.results.trackmatches.track.map((t) => ({
-    // id: t.mbid,
-    id:encodeURIComponent(t.artist),
-
-    name: t.name,
-    artist: t.artist,
-    image:
-      t.image?.find((i) => i.size === "large")?.["#text"] ||
-      "/assets/default.png",
-  }));
-}
-
-export async function getTrendingArtists(limit = 5) {
-  const data = await lfmFetch<{
-    artists: {
-      artist: {
-        name: string;
-        mbid: string;
-      }[];
-    };
-  }>({
-    method: "chart.getTopArtists",
-    limit,
-  });
-
   return Promise.all(
-    data.artists.artist.map(async (a) => ({
-      name: a.name,
-      mbid: a.mbid,
-      image: await getArtistImage(a.name),
-    })),
+    data.results.trackmatches.track.map(async (t) => {
+      const searchQuery = `${t.name} ${t.artist} audio`;
+
+      const image = await getTrackImageFromiTunes(searchQuery);
+      const previewUrl = await getTrackPreviewFromiTunes(searchQuery);
+ console.log("TRACK PREVIEW >>>", t.name, previewUrl);
+
+      return {
+        id: encodeURIComponent(t.artist),
+        name: t.name,
+        artist: t.artist,
+        image,
+        previewUrl, 
+      };
+    }),
   );
 }
 
@@ -280,51 +249,85 @@ export async function getTrendingTracks(limit = 5) {
       name: t.name,
       artist: t.artist.name,
       mbid: t.mbid,
-      image: await getTrackImage(t.mbid),
+      image: await getTrackImageFromiTunes(`${t.artist.name} ${t.name}`),
+    })),
+  );
+}
+export async function getArtistImageFromiTunes(query: string) {
+  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(
+    query,
+  )}&entity=song&limit=1`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const track = data.results?.[0];
+  return track?.artworkUrl100 || "/assets/defaultArtiest.png";
+}
+
+export async function searchArtists(query: string) {
+  const data = await lfmFetch<{
+    results?: {
+      artistmatches?: {
+        artist?: {
+          name: string;
+          listeners: string;
+          mbid: string;
+        }[];
+      };
+    };
+  }>({
+    method: "artist.search",
+    artist: query,
+    limit: 10,
+  });
+
+  const artists = data?.results?.artistmatches?.artist;
+  if (!artists || !Array.isArray(artists)) return [];
+
+  return Promise.all(
+    artists.map(async (a) => ({
+      id: a.mbid || encodeURIComponent(a.name),
+      name: a.name,
+      listeners: a.listeners,
+      image: await getArtistImageFromiTunes(`${a.name} top track`),
+    })),
+  );
+}
+export async function getTrendingArtists(limit = 5) {
+  const data = await lfmFetch<{
+    artists?: {
+      artist?: {
+        name: string;
+        mbid: string;
+      }[];
+    };
+  }>({
+    method: "chart.getTopArtists",
+    limit,
+  });
+
+  const artists = data?.artists?.artist;
+  if (!artists || !Array.isArray(artists)) return [];
+
+  return Promise.all(
+    artists.map(async (a) => ({
+      name: a.name,
+      mbid: a.mbid,
+      image: await getArtistImageFromiTunes(`${a.name} top track`),
     })),
   );
 }
 
-export async function getArtistImage(name: string) {
-  if (!name) return "/assets/defaultArtiest.png";
+export async function getTrackPreviewFromiTunes(query: string) {
+  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(
+    query,
+  )}&entity=song&limit=1`;
 
-  try {
-    const data = await lfmFetch<{
-      artist?: {
-        image?: { size: string; ["#text"]: string }[];
-      };
-    }>({
-      method: "artist.getInfo",
-      artist: name,
-    });
+  const res = await fetch(url);
+  const data = await res.json();
 
-    const images = data.artist?.image;
-    const large = images?.find((img) => img.size === "extralarge")?.["#text"];
+  const track = data.results?.[0];
 
-    return large || "/assets/defaultArtiest.png";
-  } catch {
-    return "/assets/defaultArtiest.png";
-  }
-}
-
-export async function getTrackImage(mbid: string) {
-  if (!mbid) return "/assets/default.png";
-
-  try {
-    const mb = await mbFetch<{
-      releases?: { id: string }[];
-    }>(`${MB_BASE}/recording/${mbid}?inc=releases&fmt=json`);
-
-    const releaseId = mb.releases?.[0]?.id;
-    if (!releaseId) return "/assets/default.png";
-
-    const coverUrl = `https://coverartarchive.org/release/${releaseId}/front-250`;
-
-    const res = await fetch(coverUrl);
-    if (!res.ok) return "/assets/default.png";
-
-    return coverUrl;
-  } catch {
-    return "/assets/default.png";
-  }
+  return track?.previewUrl || null;
 }

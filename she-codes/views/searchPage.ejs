@@ -30,7 +30,7 @@
             <input
               type="text"
               name="q"
-              id="mySearch"
+              id="mySearch" value="<%= q %>"
               placeholder="Zoek naar artiest of nummer"
             />
             <button class="searchButton" type="submit">Zoeken</button>
@@ -80,13 +80,13 @@
       🎧 Maak jouw afspeellijst
     </a>
     <div id="home-sections">
-      <% if (!query) { %>
+      <% if (!q) { %>
   <!-- 🔥 Trending artiesten -->
   <h2 class="section-title">🔥 Trending artiesten</h2>
   <div class="home-row">
   <% artists.forEach(a => { %>
     <div class="home-card">
-      <img src="assets/defaultArtiest.png" class="home-img round">
+      <img src="<%= a.image %>" class="home-img round">
       <p><%= a.name %></p>
     </div>
   <% }) %>
@@ -97,36 +97,58 @@
 
   <% tracks.forEach(t => { %>
     <div class="home-card">
-      <img src="assets/default.png" class="home-img round">
+      <img src="<%= t.image %>" class="home-img round">
       <p><%= t.name %></p>
     </div>
   <% }) %>
       </div>
 
 <% } else { %>
+  <section class="search-result">
   <!-- 🔍 Resultaten -->
-  <h2>🔍 Resultaten voor "<%= query %>"</h2>
-  <div id="results">
-    <% artists.forEach(a => { %>
-      <div class="result-item artist-item">
-        <img src="<%= a.image %>" class="image">
-        <div><strong><%= a.name %></strong></div>
-        <a href="/detail/<%= a.id %>" class="details-btn">Details</a>
-      </div>
-    <% }) %>
+ <h2>🔍 Resultaten voor "<%= q %>"</h2>
 
-    <% tracks.forEach(t => { %>
-      <div class="result-item track-item">
-        <img src="<%= t.image %>" class="image">
-        <div><strong><%= t.name %></strong><p><%= t.artist %></p></div>
-        <a href="/detail/<%= t.id %>" class="details-btn">Details</a>
-      </div>
-    <% }) %>
-  </div>
-<% } %>
+<div id="results">
+  <% results.forEach(item => { %>
 
-     </div>
-  
+    <div class="result-item" data-type="<%= item.type %>">
+
+      <% if (item.type === "artist") { %>
+        <div class="artist-item">
+          <img src="<%= item.data.image %>" class="image">
+          <div><strong><%= item.data.name %></strong></div>
+          <a href="/detail/<%= item.data.id %>" class="details-btn">Details</a>
+        </div>
+      <% } %>
+
+      <% if (item.type === "track") { %>
+        <div class="track-item">
+          <img src="<%= item.data.image %>" class="image">
+          <div>
+            <strong><%= item.data.name %></strong>
+            <p><%= item.data.artist %></p>
+          </div>
+
+          <div class="btn-play-detail">
+            <button 
+              class="play-circle-btn"
+              onclick="togglePlay(this, '<%- item.data.previewUrl %>')"
+            >
+              ▶
+            </button>
+
+            <a href="/detail/<%= item.data.id %>" class="details-btn">Details</a>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+
+  <% }) %>
+</div>
+</section>
+  <% } %>
+
     <div id="loginModal" class="modal">
       <button class="close-1">×</button>
       <div class="modal-content">
