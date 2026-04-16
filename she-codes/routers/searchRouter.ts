@@ -48,7 +48,8 @@ export function searchPageRouter() {
         q,
       });
     } catch (er) {
-      return res.status(404).render("404", {
+      console.error("SEARCH ERROR", er)
+      return res.render("searchPage", {
         result:[],
         artists: [],
         tracks: [],
