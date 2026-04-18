@@ -8,8 +8,7 @@ export function searchPageRouter() {
   router.get("/", async (req, res) => {
     const q: string = typeof req.query.q === "string" ? req.query.q : "";
 
-    // trending
-
+    // TRENDING
     if (!q) {
       try {
         const artists = await getTrendingArtists(5);
@@ -28,34 +27,39 @@ export function searchPageRouter() {
         });
       }
     }
-    // zoekterm
+
+    // ZOEKRESULTATEN
     try {
       const artists = await searchArtists(q);
-
       const tracks = await searchTracks(q);
+
+      //  previewUrl
       const tracksMetPreview = tracks.filter((t) => t.previewUrl);
+
+      // (videoId)
       const mixedResults = [
         ...artists.map((a) => ({ type: "artist", data: a })),
-        ...tracksMetPreview.map((t) => ({ type: "track", data: t })),
+        ...tracksMetPreview.map((t) => ({ type: "track", data: t})),
       ];
 
       mixedResults.sort(() => Math.random() - 0.5);
+
       res.render("searchPage", {
         results: mixedResults,
-
-        artists: artists,
+        artists,
         tracks: tracksMetPreview,
         q,
       });
     } catch (er) {
-      console.error("SEARCH ERROR", er)
+      console.error("SEARCH ERROR", er);
       return res.render("searchPage", {
-        result:[],
+        results: [],
         artists: [],
         tracks: [],
         q: "",
       });
     }
   });
+
   return router;
 }

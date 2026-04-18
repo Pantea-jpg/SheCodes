@@ -34,34 +34,53 @@ document.getElementById("filter-tracks").addEventListener("click", () => {
   filterResults("track");
 });
 
-let audio = null;
+let currentAudio = null;
 let currentButton = null;
 
-window.togglePlay = function (btn, url) {
-  // Als dit dezelfde knop is en audio speelt → STOPPEN
-  if (audio && !audio.paused && currentButton === btn) {
-    audio.pause();
-    btn.textContent = "▶";
-    return;
+document.addEventListener("click", (e) => {
+  // PREVIEW BUTTON
+  if (e.target.classList.contains("play-btn")) {
+    const btn = e.target;
+    const url = btn.dataset.url;
+
+    // Zelfde knop → stoppen
+    if (currentButton === btn && currentAudio) {
+      currentAudio.pause();
+      btn.textContent = "▶";
+      currentAudio = null;
+      currentButton = null;
+      return;
+    }
+
+    // Andere audio speelt → stoppen
+    if (currentAudio) {
+      currentAudio.pause();
+      if (currentButton) currentButton.textContent = "▶";
+    }
+
+    // Nieuwe audio starten
+    currentAudio = new Audio(url);
+    currentAudio.play();
+
+    btn.textContent = "⏸";
+    currentButton = btn;
+
+    currentAudio.onended = () => {
+      btn.textContent = "▶";
+      currentAudio = null;
+      currentButton = null;
+    };
   }
 
-  // Als er al iets anders speelt → pauzeer en reset vorige knop
-  if (audio && !audio.paused) {
-    audio.pause();
-    if (currentButton) currentButton.textContent = "▶";
+  if (e.target.classList.contains("youtube-btn")) {
+    const videoId = e.target.dataset.video;
+
+    if (!videoId) {
+      alert("Geen YouTube video gevonden");
+      return;
+    }
+
+    const url = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    window.open(url, "_blank", "width=500,height=400");
   }
-
-  // Nieuwe audio starten
-  audio = new Audio(url);
-  audio.play();
-
-  // Knop veranderen naar pauze
-  btn.textContent = "⏸";
-  currentButton = btn;
-
-  // Als audio klaar is → terug naar play
-  audio.onended = () => {
-    btn.textContent = "▶";
-  };
-};
-// window.playPreview = playPreview;
+});

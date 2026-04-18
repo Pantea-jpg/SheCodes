@@ -131,12 +131,13 @@
 
           <div class="btn-play-detail">
             <button 
-              class="play-circle-btn"
-              onclick="togglePlay(this, '<%- item.data.previewUrl %>')"
+              class="play-btn tooltip"
+              data-url="<%= item.data.previewUrl %>"
+              data-tip="Preview beluisteren"
             >
               ▶
             </button>
-
+             <button class="youtube-btn tooltip" data-video="<%= item.data.videoId %>" data-tip="Volledig nummer afspelen" >🎵</button>
             <a href="/detail/<%= item.data.id %>" class="details-btn">Details</a>
           </div>
         </div>

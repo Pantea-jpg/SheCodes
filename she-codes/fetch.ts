@@ -181,6 +181,14 @@ function msToTime(ms: number): string {
 }
 // Fetch search results from iTunes (image + 30s preview) for the search page
 
+async function getYouTubeVideoId(query: string): Promise<string | null> {
+  const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+  const html = await fetch(url).then((r) => r.text());
+
+  const match = html.match(/"videoId":"(.*?)"/);
+  return match ? match[1] : null;
+}
+
 export async function getTrackImageFromiTunes(query: string) {
   const url = `https://itunes.apple.com/search?term=${encodeURIComponent(
     query,
@@ -216,15 +224,16 @@ export async function searchTracks(query: string) {
 
       const image = await getTrackImageFromiTunes(searchQuery);
       const previewUrl = await getTrackPreviewFromiTunes(searchQuery);
-      console.log("TRACK PREVIEW >>>", t.name, previewUrl);
+
+      const videoId = await getYouTubeVideoId(`${t.artist} ${t.name}`);
 
       return {
-        // id: encodeURIComponent(t.artist),
         id: `${t.artist}-${t.name}`,
         name: t.name,
         artist: t.artist,
         image,
         previewUrl,
+        videoId,
       };
     }),
   );

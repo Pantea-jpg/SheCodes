@@ -1,27 +1,34 @@
+// ===============================
+// GLOBALE STATE
+// ===============================
 let selectedMood = "";
 let selectedGenre = "";
 let selectedDuration = 15;
 let selectedTempo = 50;
 let selectedPopularity = "Populair";
 
+// Alleen 1 audio tegelijk
 let currentAudio = null;
+let currentButton = null;
 
 window.addEventListener("DOMContentLoaded", () => {
   const generateBtn = document.querySelector(".playList-generate");
   const playlistEl = document.getElementById("playlist");
 
-  // =========================
-  // TOGGLES
-  // =========================
+  // ===============================
+  // TOGGLE BUTTONS (mood + genre)
+  // ===============================
   function setupToggleButtons(selector, setter) {
     document.querySelectorAll(selector).forEach((btn) => {
       btn.addEventListener("click", () => {
         const isActive = btn.classList.contains("active");
 
+        // Eerst alles uitzetten
         document
           .querySelectorAll(selector)
           .forEach((b) => b.classList.remove("active"));
 
+        // Dan deze activeren of leegmaken
         if (!isActive) {
           btn.classList.add("active");
           setter(btn.textContent.trim());
@@ -35,9 +42,9 @@ window.addEventListener("DOMContentLoaded", () => {
   setupToggleButtons(".mood-section button", (v) => (selectedMood = v));
   setupToggleButtons(".genre-section button", (v) => (selectedGenre = v));
 
-  // =========================
+  // ===============================
   // INPUTS
-  // =========================
+  // ===============================
   document.getElementById("duration").addEventListener("change", (e) => {
     selectedDuration = Number(e.target.value);
   });
@@ -50,9 +57,9 @@ window.addEventListener("DOMContentLoaded", () => {
     selectedPopularity = e.target.value;
   });
 
-  // =========================
-  // GENERATE
-  // =========================
+  // ===============================
+  // GENERATE PLAYLIST
+  // ===============================
   generateBtn.addEventListener("click", async () => {
     if (!selectedMood && !selectedGenre) {
       alert("Kies minstens een mood of genre!");
@@ -80,9 +87,9 @@ window.addEventListener("DOMContentLoaded", () => {
     generateBtn.textContent = "Afspeellijst Genereren";
   });
 
-  // =========================
-  // RENDER
-  // =========================
+  // ===============================
+  // RENDER PLAYLIST
+  // ===============================
   function renderPlaylist(tracks) {
     playlistEl.innerHTML = "";
 
@@ -102,36 +109,50 @@ window.addEventListener("DOMContentLoaded", () => {
         <button class="play-preview">▶ Afspelen</button>
       `;
 
-      // ================= PLAY =================
+      // ===============================
+      // PLAY PREVIEW (simpel & duidelijk)
+      // ===============================
       const btn = card.querySelector(".play-preview");
 
       btn.addEventListener("click", () => {
-        if (currentAudio && !currentAudio.paused) {
+        // 1. Stop ALTIJD eerst wat er al speelt
+        if (currentAudio) {
           currentAudio.pause();
-          btn.textContent = "▶ Aspelen";
+          if (currentButton) {
+            currentButton.textContent = "▶ Afspelen";
+          }
+        }
+
+        // 2. Als je op dezelfde knop klikt → gewoon stoppen
+        if (currentButton === btn) {
           currentAudio = null;
+          currentButton = null;
           return;
         }
 
-        if (currentAudio) {
-          currentAudio.pause();
+        // 3. Nieuw nummer starten
+        if (!track.previewUrl) {
+          alert("Geen preview beschikbaar");
+          return;
         }
 
-        if (track.previewUrl) {
-          currentAudio = new Audio(track.previewUrl);
-          currentAudio.play();
-          btn.textContent = "⏸ Stop";
-        } else {
-          alert("No preview available");
-        }
+        currentAudio = new Audio(track.previewUrl);
+        currentAudio.play();
 
-        currentAudio?.addEventListener("ended", () => {
+        btn.textContent = "⏸ Stop";
+        currentButton = btn;
+
+        // 4. Als audio klaar is → reset
+        currentAudio.addEventListener("ended", () => {
           btn.textContent = "▶ Afspelen";
           currentAudio = null;
+          currentButton = null;
         });
       });
 
-      // ================= LIKE (API) =================
+      // ===============================
+      // LIKE BUTTON
+      // ===============================
       const heart = card.querySelector(".liked");
 
       heart.addEventListener("click", async () => {
