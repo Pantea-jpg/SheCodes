@@ -1,310 +1,156 @@
-// VARIABLES
-// ==============================
-const moodButtons = document.querySelectorAll(".mood-section button");
-const genreButtons = document.querySelectorAll(".genre-section button");
-const durationSelect = document.getElementById("duration");
-const tempoSlider = document.getElementById("tempo");
-const popularitySelect = document.getElementById("popularity");
-const playlist = document.getElementById("playlist");
-const generateBtn = document.querySelector(".playList-generate");
-const durationText = document.getElementById("playlist-duration"); // optional
-
 let selectedMood = "";
 let selectedGenre = "";
 let selectedDuration = 15;
 let selectedTempo = 50;
 let selectedPopularity = "Populair";
 
-let artistsData = [];
 let currentAudio = null;
 
-// ==============================
-// LOAD JSON
-// ==============================
-async function loadArtists() {
-  const response = await fetch("../json/data.json");
-  artistsData = await response.json();
-}
+window.addEventListener("DOMContentLoaded", () => {
+  const generateBtn = document.querySelector(".playList-generate");
+  const playlistEl = document.getElementById("playlist");
 
-loadArtists();
+  // =========================
+  // TOGGLES
+  // =========================
+  function setupToggleButtons(selector, setter) {
+    document.querySelectorAll(selector).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const isActive = btn.classList.contains("active");
 
-// ==============================
-// MOOD BUTTONS
-// ==============================
-moodButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (btn.classList.contains("active")) {
-      btn.classList.remove("active");
-      selectedMood = "";
-      return;
-    }
-    moodButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    selectedMood = btn.textContent.trim();
-  });
-});
+        document
+          .querySelectorAll(selector)
+          .forEach((b) => b.classList.remove("active"));
 
-// ==============================
-// GENRE BUTTONS
-// ==============================
-genreButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (btn.classList.contains("active")) {
-      btn.classList.remove("active");
-      selectedGenre = "";
-      return;
-    }
-    genreButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    selectedGenre = btn.textContent.trim();
-  });
-});
-
-// ==============================
-// SELECTS
-// ==============================
-durationSelect.addEventListener("change", () => {
-  selectedDuration = Number(durationSelect.value);
-});
-
-tempoSlider.addEventListener("input", () => {
-  selectedTempo = Number(tempoSlider.value);
-});
-
-popularitySelect.addEventListener("change", () => {
-  selectedPopularity = popularitySelect.value;
-});
-
-// ==============================
-// SHUFFLE FUNCTION
-// ==============================
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-// ==============================
-// GENERATE PLAYLIST
-// ==============================
-generateBtn.addEventListener("click", async () => {
-  if (artistsData.length === 0) {
-    await loadArtists();
-  }
-
-  let tracks = [];
-
-  artistsData.forEach((artist) => {
-    // FILTER genre case-insensitive
-    if (
-      selectedGenre &&
-      !artist.genres.some((g) =>
-        g.toLowerCase().includes(selectedGenre.toLowerCase()),
-      )
-    ) {
-      return;
-    }
-
-    artist.tracks.forEach((track) => {
-      tracks.push({
-        id: track.title,
-        name: track.title,
-        artist: artist.artist,
-        album: track.album,
-        releaseDate: track.releaseDate,
-        genre: track.genre,
-        image: artist.image,
+        if (!isActive) {
+          btn.classList.add("active");
+          setter(btn.textContent.trim());
+        } else {
+          setter("");
+        }
       });
     });
+  }
+
+  setupToggleButtons(".mood-section button", (v) => (selectedMood = v));
+  setupToggleButtons(".genre-section button", (v) => (selectedGenre = v));
+
+  // =========================
+  // INPUTS
+  // =========================
+  document.getElementById("duration").addEventListener("change", (e) => {
+    selectedDuration = Number(e.target.value);
   });
 
-  // ==========================
-  // MOOD FILTER
-  // ==========================
-  if (selectedMood === "😎 Chill") {
-    tracks = tracks.filter(
-      (t) =>
-        t.genre.includes("Pop") ||
-        t.genre.includes("R&B") ||
-        t.genre.includes("Alternative") ||
-        t.genre.includes("Jazz"),
-    );
-  } else if (selectedMood === "🏃Energiek") {
-    tracks = tracks.filter(
-      (t) =>
-        t.genre.includes("Hip-Hop") ||
-        t.genre.includes("Pop/Funk") ||
-        t.genre.includes("Pop/Electropop") ||
-        t.genre.includes("R&B/Pop"),
-    );
-  } else if (selectedMood === "😴 Slaap") {
-    tracks = tracks.filter(
-      (t) =>
-        t.genre.includes("Pop/Soul") ||
-        t.genre.includes("Pop/Folk") ||
-        t.genre.includes("Pop/Alternative") ||
-        t.genre.includes("Jazz"),
-    );
-  } else if (selectedMood === "💔 Verdrietig") {
-    tracks = tracks.filter(
-      (t) => t.genre.includes("Pop/Soul") || t.genre.includes("Pop/R&B"),
-    );
-  }
-  // ==========================
-  // TEMPO FILTER
-  // ==========================
-  if (selectedTempo < 33) {
-    tracks = tracks.slice(0, 4);
-  } else if (selectedTempo > 66) {
-    tracks = tracks.slice(0, 8);
-  }
-
-  // ==========================
-  // POPULARITY FILTER
-  // ==========================
-  if (selectedPopularity === "Nieuw") {
-    tracks = tracks.filter((t) => Number(t.releaseDate) >= 2016);
-  } else if (selectedPopularity === "Trending") {
-    tracks = tracks.slice(0, 6);
-  } else if (selectedPopularity === "Populair") {
-    tracks = tracks.slice(0, 10);
-  }
-
-  // ==========================
-  // SHUFFLE PLAYLIST
-  // ==========================
-  tracks = shuffleArray(tracks);
-
-  // ==========================
-  // RENDER PLAYLIST
-  // ==========================
-  renderPlaylist(tracks);
-});
-
-// ==============================
-// RENDER PLAYLIST FUNCTION
-// ==============================
-function renderPlaylist(tracks) {
-  playlist.innerHTML = "";
-
-  if (tracks.length === 0) {
-    playlist.innerHTML = "<p>Geen nummers gevonden 😢</p>";
-    return;
-  }
-
-  tracks.forEach((track) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-   const previewUrl= "https://samplelib.com/lib/preview/mp3/sample-15s.mp3";
-    card.innerHTML = `
-      <div class="img">
-        <img src="${track.image}" alt="cover" />
-        <div class="liked" data-id="${track.id}">&#10084;</div>
-      </div>
-      <h2>${track.name}</h2>
-      <p>${track.artist}</p>
-      <button class="play-preview" data-preview="${previewUrl}">
-        ▶ Afspeel Preview
-      </button>
-    `;
-    playlist.appendChild(card);
+  document.getElementById("tempo").addEventListener("input", (e) => {
+    selectedTempo = Number(e.target.value);
   });
 
-  activatePreviewButtons();
-  activateLikeButtons();
-}
+  document.getElementById("popularity").addEventListener("change", (e) => {
+    selectedPopularity = e.target.value;
+  });
 
-// ==============================
-// PLAY PREVIEW FUNCTION
-// ==============================
+  // =========================
+  // GENERATE
+  // =========================
+  generateBtn.addEventListener("click", async () => {
+    if (!selectedMood && !selectedGenre) {
+      alert("Kies minstens een mood of genre!");
+      return;
+    }
 
-  
-function activatePreviewButtons() {
-  const buttons = document.querySelectorAll(".play-preview");
+    generateBtn.textContent = "Loading...";
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const url = btn.dataset.preview;
-
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio = null;
-
-        buttons.forEach((b) => (b.textContent = "▶ Afspeel Preview"));
-
-
-        return;
-      }
-
-      currentAudio = new Audio(url);
-      currentAudio.play();
-
-      btn.textContent = "⏸ Stop Preview";
-
-      currentAudio.onended = () => {
-        btn.textContent = "▶ Afspeel Preview";
-        currentAudio = null;
-      };
+    const res = await fetch("/generator/api/generate-playlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        mood: selectedMood,
+        genre: selectedGenre,
+        duration: selectedDuration,
+        tempo: selectedTempo,
+        popularity: selectedPopularity,
+      }),
     });
+
+    const data = await res.json();
+
+    renderPlaylist(data.playlist || []);
+
+    generateBtn.textContent = "Afspeellijst Genereren";
   });
-}
-// ==============================
-// LIKE SYSTEM
-// ==============================
-function activateLikeButtons() {
-  const hearts = document.querySelectorAll(".liked");
 
-  hearts.forEach((heart) => {
-    const id = heart.dataset.id;
-    let liked = JSON.parse(localStorage.getItem("likedTracks")) || [];
+  // =========================
+  // RENDER
+  // =========================
+  function renderPlaylist(tracks) {
+    playlistEl.innerHTML = "";
 
-    if (liked.includes(id)) heart.classList.add("active");
+    tracks.forEach((track) => {
+      const card = document.createElement("div");
+      card.className = "card";
 
-    heart.addEventListener("click", () => {
-      liked = JSON.parse(localStorage.getItem("likedTracks")) || [];
+      card.innerHTML = `
+        <div class="img">
+          <img src="${track.image}" alt="cover" />
+          <div class="liked">❤</div>
+        </div>
 
-      if (!liked.includes(id)) {
-        liked.push(id);
-        heart.classList.add("active");
-      } else {
-        liked = liked.filter((x) => x !== id);
-        heart.classList.remove("active");
-      }
+        <h2>${track.name}</h2>
+        <p>${track.artist}</p>
 
-      localStorage.setItem("likedTracks", JSON.stringify(liked));
-    });
-  });
-}
-async function renderLikedSongs() {
-  if (artistsData.length === 0) {
-    await loadArtists();
-  }
+        <button class="play-preview">▶ Afspelen</button>
+      `;
 
-  let liked = JSON.parse(localStorage.getItem("likedTracks")) || [];
-  let likedTracks = [];
+      // ================= PLAY =================
+      const btn = card.querySelector(".play-preview");
 
-  artistsData.forEach((artist) => {
-    artist.tracks.forEach((track) => {
-      if (liked.includes(track.title)) {
-        likedTracks.push({
-          id: track.title,
-          name: track.title,
-          artist: artist.artist,
-          album: track.album,
-          releaseDate: track.releaseDate,
-          genre: track.genre,
-          image: artist.image,
+      btn.addEventListener("click", () => {
+        if (currentAudio && !currentAudio.paused) {
+          currentAudio.pause();
+          btn.textContent = "▶ Aspelen";
+          currentAudio = null;
+          return;
+        }
+
+        if (currentAudio) {
+          currentAudio.pause();
+        }
+
+        if (track.previewUrl) {
+          currentAudio = new Audio(track.previewUrl);
+          currentAudio.play();
+          btn.textContent = "⏸ Stop";
+        } else {
+          alert("No preview available");
+        }
+
+        currentAudio?.addEventListener("ended", () => {
+          btn.textContent = "▶ Afspelen";
+          currentAudio = null;
         });
-      }
-    });
-  });
+      });
 
-  renderPlaylist(likedTracks);
-}
-document.getElementById("open-liked").addEventListener("click", () => {
-  renderLikedSongs();
+      // ================= LIKE (API) =================
+      const heart = card.querySelector(".liked");
+
+      heart.addEventListener("click", async () => {
+        const res = await fetch("/api/likes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(track),
+        });
+
+        const data = await res.json();
+
+        if (data.liked) {
+          heart.classList.add("active");
+        } else {
+          heart.classList.remove("active");
+        }
+      });
+
+      playlistEl.appendChild(card);
+    });
+  }
 });

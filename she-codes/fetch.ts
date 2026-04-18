@@ -193,7 +193,6 @@ export async function getTrackImageFromiTunes(query: string) {
   return track?.artworkUrl100 || "/assets/default.png";
 }
 
-
 export async function searchTracks(query: string) {
   const data = await lfmFetch<{
     results: {
@@ -217,14 +216,15 @@ export async function searchTracks(query: string) {
 
       const image = await getTrackImageFromiTunes(searchQuery);
       const previewUrl = await getTrackPreviewFromiTunes(searchQuery);
- console.log("TRACK PREVIEW >>>", t.name, previewUrl);
+      console.log("TRACK PREVIEW >>>", t.name, previewUrl);
 
       return {
-        id: encodeURIComponent(t.artist),
+        // id: encodeURIComponent(t.artist),
+        id: `${t.artist}-${t.name}`,
         name: t.name,
         artist: t.artist,
         image,
-        previewUrl, 
+        previewUrl,
       };
     }),
   );
