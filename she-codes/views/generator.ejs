@@ -3,29 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/generator.css" />
-    <link rel="stylesheet" href="./css/general.css" />
+
     <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/generator.css" />
+    <link rel="stylesheet" href="./css/sidemenu.css" />
+    <script type="module" src="./scripts/sidemenu.js"></script>
+
     <script type="module" src="./scripts/generator.js"></script>
+
     <title>generator</title>
   </head>
+
   <body>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <div id="sideMenu" class="side-menu">
+      <div class="side-menu-header">
+        <div class="brand">🎵 <span>Music Match</span></div>
+        <button id="closeMenu" class="close-menu">×</button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a class="nav-item active" href="/">🏠 Home</a>
+        <a class="nav-item" href="/search">🔍 Search</a>
+        <a class="nav-item" href="/generator">🎧 Playlist</a>
+        <a class="nav-item" href="#" id="openLogin">🔐 Login</a>
+        <a class="nav-item" href="#" id="openInfo">ℹ️ Info</a>
+      </nav>
+
+      <div class="side-menu-footer">
+        <p>Made with ❤️ for music lovers</p>
+      </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
     <header class="header">
       <div class="logo">
         <img src="./assets/logo1.png" alt="Music Match Logo" />
       </div>
+
       <nav>
         <a id="learn-more" href="#">Leer meer</a>
         <a href="/search" class="home" title="Thuis">⌂</a>
       </nav>
     </header>
+
+    <!-- MAIN -->
     <section class="generator-section">
       <main>
         <h1>Afspeellijst Generator</h1>
+
         <div class="mood-section">
-          <h2>stemming</h2>
+          <h2>Stemming</h2>
           <button>😎 Chill</button>
-          <button>🏃Energiek</button>
+          <button>🏃 Energiek</button>
           <button>😴 Slaap</button>
           <button>💔 Verdrietig</button>
         </div>
@@ -36,8 +69,9 @@
           <button>Pop</button>
           <button>Jazz</button>
         </div>
+
         <div class="setting-section">
-          <div class="setting select">
+          <div class="setting">
             <label for="duration">Duur</label>
             <select id="duration">
               <option value="15">15 min</option>
@@ -46,13 +80,15 @@
               <option value="60">60 min</option>
             </select>
           </div>
+
           <div class="setting">
             <label for="tempo">Tempo</label>
-            <input type="range" name="tempo" id="tempo" min="0" max="100" />
+            <input type="range" id="tempo" min="0" max="100" />
           </div>
-          <div class="setting select">
+
+          <div class="setting">
             <label for="popularity">Populariteit</label>
-            <select name="popularity" id="popularity">
+            <select id="popularity">
               <option value="Trending">Trending</option>
               <option value="Nieuw">Nieuw</option>
               <option value="Populair">Populair</option>
@@ -67,43 +103,44 @@
         </div>
 
         <section id="playlist"></section>
-        <div id="loginModal" class="modal">
-          <button class="close-1">×</button>
-          <div class="modal-content">
-            <h2 id="login-h2">Inloggen</h2>
-            <div>
-              <label for="username">Gebruikersnaam</label>
-              <input
-                type="text"
-                placeholder="bv. gebruiker.123@ap.be"
-                id="username"
-              />
-            </div>
-            <div>
-              <label for="password">Wachtwoord</label>
-              <input type="password" placeholder="bv. 123" id="password" />
-            </div>
-            <button>Inloggen</button>
-          </div>
-        </div>
-        <div id="infoModal" class="modal">
-          <button class="close-3">×</button>
-          <div class="modal-content" id="info-content">
-            <h2>Music Match</h2>
-            <p>
-              Music Match is een platform waar je nieuwe muziek kunt ontdekken
-              en delen met anderen. Je kunt zoeken naar artiesten, nummers en
-              albums en aanbevelingen krijgen op basis van jouw smaak. Het doel
-              van Music Match is om mensen met dezelfde muzieksmaak met elkaar
-              te verbinden en hen te helpen nieuwe favoriete nummers te vinden.
-            </p>
-          </div>
-        </div>
       </main>
+
       <aside class="aside">
-        <button id="open-liked">Mijn afspeellijst❤️</button>
-        <a href="/collection" id="myCollection">Mijn collectie</a>
+        <button id="open-liked">❤️ Mijn afspeellijst</button>
+        <a href="/collection" id="myCollection">📚 Mijn collectie</a>
       </aside>
     </section>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+      <button class="close-1">×</button>
+      <div class="modal-content">
+        <h2>Inloggen</h2>
+
+        <label>Gebruikersnaam</label>
+        <input
+          type="text"
+          placeholder="bv. gebruiker.123@ap.be"
+          id="username"
+        />
+
+        <label>Wachtwoord</label>
+        <input type="password" placeholder="bv. 123" id="password" />
+
+        <button>Inloggen</button>
+      </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+      <button class="close-3">×</button>
+      <div class="modal-content">
+        <h2>Music Match</h2>
+        <p>
+          Music Match is een platform waar je nieuwe muziek kunt ontdekken en
+          delen met anderen. Je kunt zoeken naar artiesten, nummers en albums en
+          aanbevelingen krijgen op basis van jouw smaak.
+        </p>
+      </div>
+    </div>
   </body>
 </html>

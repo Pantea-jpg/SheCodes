@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/search.css" />
     <link rel="stylesheet" href="./css/sidemenu.css" />
     <script type="module" src="./scripts/search.js"></script>
+    <script type="module" src="./scripts/sidemenu.js"></script>
+
     <script type="module" src="./scripts/general.js"></script>
 
     <title>searchPage</title>
@@ -106,7 +108,7 @@
     </a>
     <div id="home-sections">
       <% if (!q) { %>
-  <!-- 🔥 Trending artiesten -->
+
   <h2 class="section-title">🔥 Trending artiesten</h2>
   <div class="home-row">
   <% artists.forEach(a => { %>
@@ -116,7 +118,7 @@
     </div>
   <% }) %>
 </div>
-  <!-- 🌍 Populaire nummers -->
+
   <h2 class="section-title">🌍 Populaire nummers</h2>
       <div class="home-row">
 
@@ -130,7 +132,7 @@
 
 <% } else { %>
   <section class="search-result">
-  <!-- 🔍 Resultaten -->
+
  <h2>🔍 Resultaten voor "<%= q %>"</h2>
 
 <div id="results">

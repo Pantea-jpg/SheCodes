@@ -1,5 +1,7 @@
 .menu-toggle {
   position: fixed;
+  height: 50px;
+  width: 45px;
   top: 35px;
   left: 18px;
   font-size: 22px;
