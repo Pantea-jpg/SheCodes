@@ -5,6 +5,8 @@ import { searchPageRouter } from "./routers/searchRouter";
 import { generatorRouter } from "./routers/generatorRouter";
 import { collectionRouter } from "./routers/collectionRouter";
 import { detailPageRouter } from "./routers/detailPageRouter";
+import { newSearch } from "./routers/newsearch";
+
 dotenv.config();
 
 const app: Express = express();
@@ -20,6 +22,9 @@ app.use("/search", searchPageRouter());
 app.use("/generator", generatorRouter());
 app.use("/collection", collectionRouter());
 app.use("/detail", detailPageRouter());
+//trial
+app.use("/newsearch", newSearch());
+//trial
 app.get("/", (req, res) => {
   res.render("landingPage");
 });

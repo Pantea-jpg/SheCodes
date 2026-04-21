@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Match – Zoeken</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/newsearch.css" />
+    <script type="module" src="/scripts/newsearch.js" defer></script>
+  </head>
+  <body>
+
+
+    <header class="header">
+      <div class="logo">
+        <img src="/assets/logo1.png" alt="Music Match Logo" />
+      </div>
+      <nav>
+        <a id="login" href="#">Inloggen</a>
+        <a id="learn-more" href="#">Leer meer</a>
+      </nav>
+    </header>
+
+
+    <div class="page-layout">
+
+
+      <button class="menu-toggle" id="menuToggle">☰</button>
+
+      <div id="sideMenu" class="side-menu">
+        <div class="side-menu-header">
+          <div class="brand">🎵 <span>Music Match</span></div>
+          <button id="closeMenu" class="close-menu">×</button>
+        </div>
+
+        <nav class="side-menu-nav">
+          <a class="nav-item active" href="/">🏠 Home</a>
+          <a class="nav-item" href="/search">🔍 Search</a>
+          <a class="nav-item" href="/generator">🎧 Playlist</a>
+          <a class="nav-item" href="#" id="openLogin">🔐 Login</a>
+          <a class="nav-item" href="#" id="openInfo">ℹ️ Info</a>
+        </nav>
+
+        <div class="side-menu-footer">
+          <p>Made with ❤️ for music lovers</p>
+        </div>
+      </div>
+
+      <div id="overlay" class="overlay"></div>
+
+
+      <main class="search-main">
+
+        <!-- Search hero -->
+        <section class="search-hero">
+          <h1>Zoek muziek</h1>
+          <p class="search-sub">Zoek naar artiesten, nummers en albums</p>
+
+          <div class="search-bar-wrap">
+            <div class="search-type-tabs">
+              <button class="tab-btn active" data-type="tracks">🎵 Nummers</button>
+              <button class="tab-btn" data-type="artists">🎤 Artiesten</button>
+            </div>
+            <div class="search-input-row">
+              <input
+                type="text"
+                id="searchInput"
+                class="search-input"
+                placeholder="Zoek een nummer of artiest..."
+                autocomplete="off"
+              />
+              <button class="search-btn" id="searchBtn">Zoeken</button>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="results-section" id="resultsSection">
+          <div class="results-header" id="resultsHeader" style="display:none">
+            <h2>Resultaten voor: <span id="queryLabel"></span></h2>
+            <p id="resultCount"></p>
+          </div>
+
+          <div class="results-grid" id="resultsGrid">
+          </div>
+
+          <div class="loading-state" id="loadingState" style="display:none">
+            <div class="vinyl-spinner"></div>
+            <p>Zoeken...</p>
+          </div>
+
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">🎧</div>
+            <h3>Wat wil je horen?</h3>
+            <p>Typ een artiest of nummer en ontdek muziek</p>
+          </div>
+
+          <div class="no-results" id="noResults" style="display:none">
+            <div class="empty-icon">😕</div>
+            <h3>Geen resultaten gevonden</h3>
+            <p>Probeer een andere zoekterm</p>
+          </div>
+        </section>
+
+        <!-- ─── Trending ─── -->
+        <section class="trending-section" id="trendingSection">
+          <h2 class="section-title">🔥 Trending nummers</h2>
+          <div class="trending-grid" id="trendingGrid">
+            <% if (typeof trending !== 'undefined' && trending.length) { %>
+              <% trending.forEach(function(track) { %>
+                <div class="track-card trending-card">
+                  <div class="card-img-wrap">
+                    <img
+                      src="<%= track.image || '/assets/default.png' %>"
+                      alt="<%= track.name %>"
+                      class="card-img"
+                      onerror="this.src='/assets/default.png'"
+                    />
+                    <div class="card-overlay">
+                      <button class="play-btn" data-preview="">▶</button>
+                    </div>
+                  </div>
+                  <div class="card-info">
+                    <p class="card-title"><%= track.name %></p>
+                    <p class="card-artist"><%= track.artist %></p>
+                  </div>
+                  <button class="fav-btn" aria-label="Toevoegen aan favorieten">♡</button>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <p class="no-data">Trending data niet beschikbaar.</p>
+            <% } %>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <div class="player-bar" id="playerBar" style="display:none">
+      <div class="player-info">
+        <img src="" alt="" id="playerImg" class="player-thumb" />
+        <div>
+          <p class="player-title" id="playerTitle">—</p>
+          <p class="player-artist" id="playerArtist">—</p>
+        </div>
+      </div>
+      <div class="player-controls">
+        <audio id="audioEl" controls></audio>
+      </div>
+      <button class="player-close" id="playerClose">✕</button>
+    </div>
+
+  </body>
+</html>
