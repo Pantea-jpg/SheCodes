@@ -1,4 +1,5 @@
 import express from "express";
+import { getDB } from "../database";
 import { searchTracks } from "../fetch";
 
 export function generatorRouter() {
@@ -40,6 +41,28 @@ export function generatorRouter() {
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Playlist genereren mislukt" });
+    }
+  });
+
+  //liked
+  router.post("/api/likes", async (req, res) => {
+    try {
+      const track = req.body;
+      const db = getDB();
+      const liked = db.collection("liked");
+
+      const exists = await liked.findOne({ id: track.id });
+
+      if (exists) {
+        await liked.deleteOne({ id: track.id });
+        return res.json({ liked: false });
+      }
+
+      await liked.insertOne(track);
+      res.json({ liked: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Like opslaan mislukt" });
     }
   });
 
