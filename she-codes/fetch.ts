@@ -179,6 +179,7 @@ function msToTime(ms: number): string {
   const s = String(totalSec % 60).padStart(2, "0");
   return `${m}:${s}`;
 }
+
 // Fetch search results from iTunes (image + 30s preview) for the search page
 
 async function getYouTubeVideoId(query: string): Promise<string | null> {
