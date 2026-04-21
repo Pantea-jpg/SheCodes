@@ -7,6 +7,7 @@ export function searchPageRouter() {
 
   router.get("/", async (req, res) => {
     const q: string = typeof req.query.q === "string" ? req.query.q : "";
+    
 
     // TRENDING
     if (!q) {
@@ -36,7 +37,7 @@ export function searchPageRouter() {
       //  previewUrl
       const tracksMetPreview = tracks.filter((t) => t.previewUrl);
 
-      // (videoId)
+      
       const mixedResults = [
         ...artists.map((a) => ({ type: "artist", data: a })),
         ...tracksMetPreview.map((t) => ({ type: "track", data: t})),

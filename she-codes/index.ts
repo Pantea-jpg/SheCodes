@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import { connect } from "./database";
 import dotenv from "dotenv";
 import path from "path";
 import { searchPageRouter } from "./routers/searchRouter";
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
   res.render("landingPage");
 });
 
-app.listen(app.get("port"), () => {
+app.listen(app.get("port"), async() => {
+  await connect();
   console.log("Server started on http://localhost:" + app.get("port"));
 });

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./css/sidemenu.css" />
     <script type="module" src="./scripts/search.js"></script>
     <script type="module" src="./scripts/sidemenu.js"></script>
-
     <script type="module" src="./scripts/general.js"></script>
 
     <title>searchPage</title>
@@ -30,6 +29,7 @@
     <a class="nav-item active" href="/">🏠 Home</a>
     <a class="nav-item" href="/search">🔍 Search</a>
     <a class="nav-item" href="/generator">🎧 Playlist</a>
+    <a class="nav-item" href="/collection" id="myCollection">📚 Mijn collectie</a>
     <a class="nav-item" href="#" id="openLogin">🔐 Login</a>
     <a class="nav-item" href="#" id="openInfo">ℹ️ Info</a>
   </nav>
@@ -144,7 +144,7 @@
         <div class="artist-item">
           <img src="<%= item.data.image %>" class="image">
           <div><strong><%= item.data.name %></strong></div>
-          <a href="/detail/<%= item.data.id %>" class="details-btn">Details</a>
+          <a href="/detail/<%= item.data.id %>?q=<%= q %>" class="details-btn">Details</a>
         </div>
       <% } %>
 
