@@ -136,12 +136,16 @@ button.play-preview {
   width: 140px;
   height: 30px;
 }
-.card h2 {
+
+.card-info h2,
+.card-info p {
   font-size: 15px;
   text-align: center;
-}
-.card p {
-  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;   
+  width: 120px;   
+  display: block;       
 }
 
 #playlist {

@@ -102,10 +102,10 @@ window.addEventListener("DOMContentLoaded", () => {
           <img src="${track.image}" alt="cover" />
           <span class="liked">❤</span>
         </div>
-
+      <div class="card-info">
         <h2>${track.name}</h2>
         <p>${track.artist}</p>
-
+      </div>
         <button class="play-preview">▶ Afspelen</button>
       `;
 

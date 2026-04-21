@@ -122,6 +122,22 @@ input {
   gap: 16px;
   margin-left: 10px;
 }
+.artist-name p {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  display: block;
+}
+
+ .track-title p {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
 .track-item {
   display: flex;
   flex-direction: column;
@@ -129,6 +145,7 @@ input {
   text-align: center;
   gap: 4px;
 }
+
 main {
   position: sticky;
   top: 0;

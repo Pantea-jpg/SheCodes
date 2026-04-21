@@ -143,7 +143,7 @@
       <% if (item.type === "artist") { %>
         <div class="artist-item">
           <img src="<%= item.data.image %>" class="image">
-          <div><strong><%= item.data.name %></strong></div>
+          <div class="artist-name"><p><strong><%= item.data.name %></strong></p></div>
           <a href="/detail/<%= item.data.id %>?q=<%= q %>" class="details-btn">Details</a>
         </div>
       <% } %>
@@ -151,9 +151,9 @@
       <% if (item.type === "track") { %>
         <div class="track-item">
           <img src="<%= item.data.image %>" class="image">
-          <div>
-            <strong><%= item.data.name %></strong>
-            <p><%= item.data.artist %></p>
+          <div class="track-title">
+            <p class="track-name"><strong><%= item.data.name %></strong></p>
+            <p class="track-artist"><%= item.data.artist %></p>
           </div>
 
           <div class="btn-play-detail">
