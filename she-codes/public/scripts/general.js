@@ -10,8 +10,8 @@ const errormessage = document.querySelector("#error-success");
 const infoModal = document.querySelector("#infoModal");
 const learnMore = document.querySelector("#learn-more");
 
-const usernameTest = "pantea@ap.be";
-const passwordTest = "1234";
+const usernameTest = process.env.ADMIN_1;
+const passwordTest = process.env.PASS_1;
 
 if (!window.location.pathname.includes("landingPage.ejs")) {
   logo.addEventListener("click", () => {
@@ -35,23 +35,7 @@ loginButton.addEventListener("click", () => {
   modal.style.display = "flex";
 });
 
-loginModalButton.addEventListener("click", () => {
-  const userName = document.querySelector("#username").value;
-  const password = document.querySelector("#password").value;
-
-  errormessage.className = "";
-
-  if (userName !== usernameTest || password !== passwordTest) {
-    errormessage.classList.add("red");
-    errormessage.textContent = "Uw gegevens klopt niet!";
-  } else {
-    errormessage.classList.add("green");
-    errormessage.textContent = "Je hebt successful ingelogd!";
-    setTimeout(() => {
-      window.location.href = "/search";
-    }, 2000);
-  }
-});
+// 
 
 close1.addEventListener("click", () => {
   modal.style.display = "none";

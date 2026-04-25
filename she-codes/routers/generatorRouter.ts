@@ -48,7 +48,7 @@ export function generatorRouter() {
   router.post("/api/likes", async (req, res) => {
     try {
       const track = req.body;
-      const db = getDB();
+      const db = await getDB();
       const liked = db.collection("liked");
 
       const exists = await liked.findOne({ id: track.id });
