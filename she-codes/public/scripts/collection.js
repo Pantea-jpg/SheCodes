@@ -37,6 +37,7 @@ function renderCollection(list) {
   });
 }
 
+// 🔍 SEARCH
 document.getElementById("searchForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -48,6 +49,27 @@ document.getElementById("searchForm").addEventListener("submit", function (e) {
   );
 
   renderCollection(filtered);
+});
+
+// 🔽 SORT
+document.getElementById("sort").addEventListener("change", function () {
+  const value = this.value;
+
+  let sorted = [...likedSongsCache];
+
+  if (value === "name") {
+    sorted.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (value === "artist") {
+    sorted.sort((a, b) => a.artist.localeCompare(b.artist));
+  }
+
+  if (value === "popularity") {
+    sorted.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+  }
+
+  renderCollection(sorted);
 });
 
 document.addEventListener("DOMContentLoaded", toonMijnCollectie);
