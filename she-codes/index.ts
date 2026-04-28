@@ -1,10 +1,13 @@
 import express, { Express } from "express";
+import { connect, login } from "./database";
 import dotenv from "dotenv";
 import path from "path";
 import { searchPageRouter } from "./routers/searchRouter";
 import { generatorRouter } from "./routers/generatorRouter";
 import { collectionRouter } from "./routers/collectionRouter";
 import { detailPageRouter } from "./routers/detailPageRouter";
+import { loginPage } from "./routers/login";
+
 dotenv.config();
 
 const app: Express = express();
@@ -20,10 +23,13 @@ app.use("/search", searchPageRouter());
 app.use("/generator", generatorRouter());
 app.use("/collection", collectionRouter());
 app.use("/detail", detailPageRouter());
+app.use("/login", loginPage());
+
 app.get("/", (req, res) => {
   res.render("landingPage");
 });
 
-app.listen(app.get("port"), () => {
+app.listen(app.get("port"), async () => {
+  await connect();
   console.log("Server started on http://localhost:" + app.get("port"));
 });

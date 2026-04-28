@@ -45,6 +45,13 @@ background-color: var(--light);
   border-radius: 50%;
   height: 50px;
   width: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex: 0 0 50px;   /* verhindert Flex-Stretching */
+  overflow: hidden; /* verhindert, dass Inhalt den Kreis vergrößert */
 }
 
 form {
@@ -155,6 +162,13 @@ article {
     height: 40px;
     width: 40px;
     font-size: 0.9rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    flex: 0 0 40px;
+    overflow: hidden;
   }
 
   /* Formulare auf volle Breite */

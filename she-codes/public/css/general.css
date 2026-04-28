@@ -123,7 +123,6 @@ nav a:hover {
   width: 420px;
   max-width: 90%;
   gap: 15px;
-  
 }
 
 #info-content h2 {
@@ -143,6 +142,7 @@ nav a:hover {
 }
 
 .modal-content {
+  position: relative;
   background: white;
   padding: 35px;
   width: 350px;

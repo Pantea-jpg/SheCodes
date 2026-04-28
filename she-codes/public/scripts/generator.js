@@ -100,12 +100,12 @@ window.addEventListener("DOMContentLoaded", () => {
       card.innerHTML = `
         <div class="img">
           <img src="${track.image}" alt="cover" />
-          <div class="liked">❤</div>
+          <span class="liked">❤</span>
         </div>
-
+      <div class="card-info">
         <h2>${track.name}</h2>
         <p>${track.artist}</p>
-
+      </div>
         <button class="play-preview">▶ Afspelen</button>
       `;
 
@@ -156,10 +156,16 @@ window.addEventListener("DOMContentLoaded", () => {
       const heart = card.querySelector(".liked");
 
       heart.addEventListener("click", async () => {
-        const res = await fetch("/api/likes", {
+        const res = await fetch("/generator/api/likes", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(track),
+          body: JSON.stringify({
+            id: track.id,
+            name: track.name,
+            artist: track.artist,
+            image: track.image,
+            previewUrl: track.previewUrl,
+          }),
         });
 
         const data = await res.json();

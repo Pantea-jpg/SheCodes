@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/general.css" />
     <link rel="stylesheet" href="./css/landingPage.css" />
-    <script type="module" src="./scripts/general.js"></script>
-    <script type="module" src="./scripts/landingPage.js"></script>
-    <script type="module" src="./scripts/justToTest.js"></script>
+    <script type="module" src="./scripts/general.js" defer></script>
+    <script type="module" src="./scripts/landingPage.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -18,7 +17,7 @@
         <img src="./assets/logo1.png" alt="Music Match Logo" />
       </div>
       <nav>
-        <a id="login" href="#">Inloggen</a>
+        <a id="login" href="/login">Inloggen</a>
         <a id="learn-more" href="#">Leer meer</a>
       </nav>
     </header>
@@ -33,7 +32,9 @@
             src="./assets/musicMatchimage.png"
             alt="Music Match Image"
           />
-          <button>Join now!</button>
+          <button>
+            <a href="/login">Join now!</a>
+          </button>
         </section>
         <section class="projects project-a">
           <h1>Project A</h1>
@@ -58,29 +59,6 @@
       </div>
       <div class="message">
         <h1>Login to access all features!</h1>
-      </div>
-      <div id="loginModal" class="modal">
-        <button class="close-1">×</button>
-        <div class="modal-content">
-          <h2 id="login-h2">Inloggen</h2>
-          <div id="error-success"></div>
-          <div>
-            <label for="username">Gebruikersnaam</label>
-            <input
-              type="text"
-              placeholder="bv. gebruiker.123@ap.be"
-              id="username"
-            />
-          </div>
-          <div>
-            <label for="password">Wachtwoord</label>
-            <input type="password" placeholder="bv. 123" id="password" />
-          </div>
-          <div class="buttons">
-            <button class="login-button">Inloggen</button>
-            <button class="register-button">Registreren</button>
-          </div>
-        </div>
       </div>
       <div class="access-denied">
         <button class="close-2">×</button>

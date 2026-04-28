@@ -136,12 +136,16 @@ button.play-preview {
   width: 140px;
   height: 30px;
 }
-.card h2 {
+
+.card-info h2,
+.card-info p {
   font-size: 15px;
   text-align: center;
-}
-.card p {
-  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;   
+  width: 120px;   
+  display: block;       
 }
 
 #playlist {
@@ -156,15 +160,27 @@ button.play-preview {
   font-size: 10px;
 }
 .liked {
-  font-size: 18px;
+  /* font-size: 18px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer; */
   /* color: #1b1919; */
+  display: inline-block;
+  color: white; /* startkleur */
+  font-size: 22px;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 .liked.active {
   color: red;
+  transform: scale(1.2);
 }
+.img {
+  position: relative;
+}
+
 button.active {
   background-color: #ff8c42;
   color: white;

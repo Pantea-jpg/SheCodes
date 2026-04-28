@@ -1,32 +1,33 @@
 async function toonMijnCollectie() {
-    const response = await fetch("./json/data.json");
-    const artists = await response.json();
-    const likedSongs = JSON.parse(localStorage.getItem("likedTracks")) || [];
-    const container = document.getElementById("collection-container");
-    
-    container.innerHTML = ""; 
+  const res = await fetch("/collection/api/liked");
+  const likedSongs = await res.json();
 
-    if (likedSongs.length === 0) {
-        container.innerHTML = "<p>Je hebt nog geen favorieten uit de generator toegevoegd.</p>";
-        return;
-    }
+  const container = document.getElementById("collection-container");
+  container.innerHTML = "";
 
-    artists.forEach(artist => {
-        artist.tracks.forEach(track => {
-            if (likedSongs.includes(track.title)) {
-                container.innerHTML += `
-                    <article>
-                        <figure><img src="${artist.image}" alt="cover" /></figure>
-                        <div>
-                            <h2>${track.title}</h2>
-                            <p>${artist.artist}</p>
-                            <p>${track.releaseDate}</p>
-                            <p>${track.genre}</p>
-                            <div><button type="button">❤️</button></div>
-                        </div>
-                    </article>`;
-            }
-        });
-    });
+  if (!likedSongs.length) {
+    container.innerHTML = "<p>Geen favorieten 😢</p>";
+    return;
+  }
+
+  likedSongs.forEach((track) => {
+    const card = document.createElement("article");
+
+    card.innerHTML = `
+      <div class="card">
+        <img src="${track.image}" alt="cover" />
+
+        <div class="info">
+          <h2>${track.name}</h2>
+          <p>${track.artist}</p>
+        </div>
+
+        <button class="heart">❤️</button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
 }
+
 document.addEventListener("DOMContentLoaded", toonMijnCollectie);

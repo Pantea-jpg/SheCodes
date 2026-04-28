@@ -7,9 +7,35 @@
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/general.css" />
     <link rel="stylesheet" href="/css/detailPage.css" />
+    <link rel="stylesheet" href="/css/sidemenu.css" />
+    <script type="module" src="/scripts/sidemenu.js"></script>
+
     <script type="module" src="/scripts/general.js"></script>
   </head>
   <body>
+     <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <div id="sideMenu" class="side-menu">
+      <div class="side-menu-header">
+        <div class="brand">🎵 <span>Music Match</span></div>
+        <button id="closeMenu" class="close-menu">×</button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a class="nav-item active" href="/">🏠 Home</a>
+        <a class="nav-item" href="/search">🔍 Search</a>
+        <a class="nav-item" href="/generator">🎧 Playlist</a>
+        <a class="nav-item" href="/collection" id="myCollection">📚 Mijn collectie</a>
+        <a class="nav-item" href="#" id="openLogin">🔐 Login</a>
+        <a class="nav-item" href="#" id="openInfo">ℹ️ Info</a>
+      </nav>
+
+      <div class="side-menu-footer">
+        <p>Made with ❤️ for music lovers</p>
+      </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
     <header class="header">
       <div class="logo">
         <img src="/assets/logo1.png" alt="Music Match Logo" />
@@ -21,7 +47,7 @@
     </header>
 
     <main class="artist-page">
-      <a href="/search" id="back-button">Terug</a>
+      <a href="/search?q=<%= q %>" id="back-button">Terug</a>
 
 
       <section class="artist-info">

@@ -7,19 +7,46 @@
 
     <link rel="stylesheet" href="./css/general.css" />
     <link rel="stylesheet" href="./css/search.css" />
+    <link rel="stylesheet" href="./css/sidemenu.css" />
     <script type="module" src="./scripts/search.js"></script>
+    <script type="module" src="./scripts/sidemenu.js"></script>
     <script type="module" src="./scripts/general.js"></script>
 
     <title>searchPage</title>
   </head>
   <body>
+<button class="menu-toggle" id="menuToggle">☰</button>
+
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-header">
+    <div class="brand">
+      🎵 <span>Music Match</span>
+    </div>
+    <button id="closeMenu" class="close-menu">×</button>
+  </div>
+
+  <nav class="side-menu-nav">
+    <a class="nav-item active" href="/">🏠 Home</a>
+    <a class="nav-item" href="/search">🔍 Search</a>
+    <a class="nav-item" href="/generator">🎧 Playlist</a>
+    <a class="nav-item" href="/collection" id="myCollection">📚 Mijn collectie</a>
+    <a class="nav-item" href="#" id="openLogin">🔐 Login</a>
+    <a class="nav-item" href="#" id="openInfo">ℹ️ Info</a>
+  </nav>
+
+  <div class="side-menu-footer">
+    <p>Made with ❤️ for music lovers</p>
+  </div>
+</div>
+
+<div id="overlay" class="overlay"></div>
     <main>
       <header class="header">
         <div class="logo">
           <img src="./assets/logo1.png" alt="Music Match Logo" />
         </div>
         <nav>
-          <a id="login" href="#">Uitloggen</a>
+          <a id="login" href="/login">Uitloggen</a>
           <a id="learn-more" href="#">Leer meer</a>
         </nav>
       </header>
@@ -37,8 +64,7 @@
           </form>
         </div>
         <div id="filter-container">
-          <!-- <button class="tracksbutton active">Nummers</button>
-          <button class="artistsbutton">Artiesten</button><b></b> -->
+         
        
   <button class="tracksbutton active" id="filter-artists">Artiesten</button>
   <button class="artistsbutton" id="filter-tracks">Nummers</button>
@@ -81,7 +107,7 @@
     </a>
     <div id="home-sections">
       <% if (!q) { %>
-  <!-- 🔥 Trending artiesten -->
+
   <h2 class="section-title">🔥 Trending artiesten</h2>
   <div class="home-row">
   <% artists.forEach(a => { %>
@@ -91,7 +117,7 @@
     </div>
   <% }) %>
 </div>
-  <!-- 🌍 Populaire nummers -->
+
   <h2 class="section-title">🌍 Populaire nummers</h2>
       <div class="home-row">
 
@@ -105,7 +131,7 @@
 
 <% } else { %>
   <section class="search-result">
-  <!-- 🔍 Resultaten -->
+
  <h2>🔍 Resultaten voor "<%= q %>"</h2>
 
 <div id="results">
@@ -116,17 +142,17 @@
       <% if (item.type === "artist") { %>
         <div class="artist-item">
           <img src="<%= item.data.image %>" class="image">
-          <div><strong><%= item.data.name %></strong></div>
-          <a href="/detail/<%= item.data.id %>" class="details-btn">Details</a>
+          <div class="artist-name"><p><strong><%= item.data.name %></strong></p></div>
+          <a href="/detail/<%= item.data.id %>?q=<%= q %>" class="details-btn">Details</a>
         </div>
       <% } %>
 
       <% if (item.type === "track") { %>
         <div class="track-item">
           <img src="<%= item.data.image %>" class="image">
-          <div>
-            <strong><%= item.data.name %></strong>
-            <p><%= item.data.artist %></p>
+          <div class="track-title">
+            <p class="track-name"><strong><%= item.data.name %></strong></p>
+            <p class="track-artist"><%= item.data.artist %></p>
           </div>
 
           <div class="btn-play-detail">
@@ -138,7 +164,7 @@
               ▶
             </button>
              <button class="youtube-btn tooltip" data-video="<%= item.data.videoId %>" data-tip="Volledig nummer afspelen" >🎵</button>
-            <a href="/detail/<%= item.data.id %>" class="details-btn">Details</a>
+            <a href="/detail/<%= item.data.id %>?q=<%= q %>" class="details-btn">Details</a>
           </div>
         </div>
       <% } %>

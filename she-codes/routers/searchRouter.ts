@@ -36,10 +36,9 @@ export function searchPageRouter() {
       //  previewUrl
       const tracksMetPreview = tracks.filter((t) => t.previewUrl);
 
-      // (videoId)
       const mixedResults = [
         ...artists.map((a) => ({ type: "artist", data: a })),
-        ...tracksMetPreview.map((t) => ({ type: "track", data: t})),
+        ...tracksMetPreview.map((t) => ({ type: "track", data: t })),
       ];
 
       mixedResults.sort(() => Math.random() - 0.5);
