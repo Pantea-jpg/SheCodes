@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/sidemenu.css" />
     <link rel="stylesheet" href="./css/collection.css" />
     <script src="./scripts/general.js" defer></script>
-    <script type="module" src="./scripts/sidemenu.js"></script>
+    <script type="module" src="./scripts/sidemenu.js" defer></script>
     <script src="./scripts/generator.js" defer></script>
     <script type="module" src="./scripts/collection.js" defer></script>
     <title>My collection</title>
@@ -39,7 +39,10 @@
     <header class="header">
       <!-- injaro dorost kon -->
       <div class="logo">
-        <img src="./assets/logo1.png" alt="Music Match Logo"/>
+        <img
+          src="https://raw.githubusercontent.com/Pantea-jpg/SheCodes/main/she-codes/public/assets/logo1.png"
+          alt="Music Match Logo"
+        />
       </div>
       <nav>
         <a id="login" href="/login">Uitloggen</a>
@@ -157,25 +160,7 @@
           </div>
         </article>-->
       </section>
-      <div id="loginModal" class="modal">
-        <button class="close-1">×</button>
-        <div class="modal-content">
-          <h2 id="login-h2">Inloggen</h2>
-          <div>
-            <label for="username">Gebruikersnaam</label>
-            <input
-              type="text"
-              placeholder="bv. gebruiker.123@ap.be"
-              id="username"
-            />
-          </div>
-          <div>
-            <label for="password">Wachtwoord</label>
-            <input type="password" placeholder="bv. 123" id="password" />
-          </div>
-          <button>Inloggen</button>
-        </div>
-      </div>
+
       <div id="infoModal" class="modal">
         <button class="close-3">×</button>
         <div class="modal-content" id="info-content">

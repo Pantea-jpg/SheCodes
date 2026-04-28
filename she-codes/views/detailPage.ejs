@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="/css/general.css" />
     <link rel="stylesheet" href="/css/detailPage.css" />
     <link rel="stylesheet" href="/css/sidemenu.css" />
-    <script type="module" src="/scripts/sidemenu.js"></script>
-
-    <script type="module" src="/scripts/general.js"></script>
+    <script type="module" src="/scripts/sidemenu.js" defer></script>
+    <script type="module" src="/scripts/general.js" defer></script>
   </head>
   <body>
      <button class="menu-toggle" id="menuToggle">☰</button>
@@ -37,11 +36,12 @@
 
     <div id="overlay" class="overlay"></div>
     <header class="header">
+      <!-- injaro dorost kon -->
       <div class="logo">
-        <img src="/assets/logo1.png" alt="Music Match Logo" />
+        <img src="https://raw.githubusercontent.com/Pantea-jpg/SheCodes/main/she-codes/public/assets/logo1.png" alt="Music Match Logo"/>
       </div>
       <nav>
-        <a id="login" href="#">Inloggen</a>
+        <a id="login" href="/login">Uitloggen</a>
         <a id="learn-more" href="#">Leer meer</a>
       </nav>
     </header>
@@ -102,6 +102,19 @@
           </div>
         <% }) %>
       </section>
+      <div id="infoModal" class="modal">
+        <button class="close-3">×</button>
+        <div class="modal-content" id="info-content">
+          <h2>Music Match</h2>
+          <p>
+            Music Match is een platform waar je nieuwe muziek kunt ontdekken en
+            delen met anderen. Je kunt zoeken naar artiesten, nummers en albums
+            en aanbevelingen krijgen op basis van jouw smaak. Het doel van Music
+            Match is om mensen met dezelfde muzieksmaak met elkaar te verbinden
+            en hen te helpen nieuwe favoriete nummers te vinden.
+          </p>
+        </div>
+      </div>
     </main>
   </body>
 </html>
