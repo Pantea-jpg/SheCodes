@@ -19,11 +19,10 @@ export function detailPageRouter() {
       res.render("detailPage", { data, q });
     } catch (err) {
       console.error("Detail page error:", err);
-      res
-        .status(500)
-        .render("404", {
-          message: "De artiestengegevens konden niet worden geladen.",
-        });
+      res.status(500).render("404", {
+        message: "De artiestengegevens konden niet worden geladen.",
+        q,
+      });
     }
   });
 
