@@ -57,6 +57,48 @@ export function searchPageRouter() {
         tracks: [],
         q: "",
       });
+      // }
+      // ZOEKRESULTATEN Exact match filtering
+      // try {
+      //   const artists = await searchArtists(q);
+      //   const tracks = await searchTracks(q);
+
+      //   const tracksMetPreview = tracks.filter((t) => t.previewUrl);
+
+      //   // Exact match filtering
+      //   const exactArtists = artists.filter(
+      //     (a) => a.name.toLowerCase() === q.toLowerCase(),
+      //   );
+
+      //   const exactTracks = tracksMetPreview.filter(
+      //     (t) => t.name.toLowerCase() === q.toLowerCase(),
+      //   );
+
+      //   // Use exact matches if available
+      //   const finalArtists = exactArtists.length ? exactArtists : artists;
+      //   const finalTracks = exactTracks.length ? exactTracks : tracksMetPreview;
+
+      //   const mixedResults = [
+      //     ...finalArtists.map((a) => ({ type: "artist", data: a })),
+      //     ...finalTracks.map((t) => ({ type: "track", data: t })),
+      //   ];
+
+      //   mixedResults.sort(() => Math.random() - 0.5);
+
+      //   res.render("searchPage", {
+      //     results: mixedResults,
+      //     artists: finalArtists,
+      //     tracks: finalTracks,
+      //     q,
+      //   });
+      // } catch (er) {
+      //   console.error("SEARCH ERROR", er);
+      //   return res.render("searchPage", {
+      //     results: [],
+      //     artists: [],
+      //     tracks: [],
+      //     q: "",
+      //   });
     }
   });
 
