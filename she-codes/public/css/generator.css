@@ -12,6 +12,7 @@ main {
   align-items: center;
   border-radius: 15px;
   gap: 50px;
+  min-height: 100px;
   background-color: rgb(6, 39, 110);
   padding: 10px 10px;
   box-shadow: 0 4px 10px rgba(223, 223, 223, 0.2);
@@ -19,8 +20,10 @@ main {
 .genre-section {
   display: flex;
   justify-content: center;
+  align-items: center;
   justify-content: space-around;
   background-color: rgb(6, 39, 110);
+  min-height: 100px;
   padding: 10px 10px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(223, 223, 223, 0.2);
@@ -29,7 +32,7 @@ main {
   margin-top: 11px;
 }
 h1 {
-  font-size: 10px;
+  /* font-size: 10px; */
   text-align: center;
   margin-top: 15px;
 }
@@ -63,6 +66,7 @@ button:hover {
   align-items: center;
   justify-content: space-around;
   gap: 200px;
+ min-height: 100px;
   background-color: rgb(6, 39, 110);
   padding: 10px 10px;
   border-radius: 15px;
@@ -143,9 +147,9 @@ button.play-preview {
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;   
-  width: 120px;   
-  display: block;       
+  white-space: nowrap;
+  width: 120px;
+  display: block;
 }
 
 #playlist {
