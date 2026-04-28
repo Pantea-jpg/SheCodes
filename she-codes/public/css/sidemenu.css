@@ -132,6 +132,8 @@
 }
 
 .side-menu-user {
+  position: relative;
+  top: 330px;
   display: flex;
   align-items: center;
   gap: 12px;
