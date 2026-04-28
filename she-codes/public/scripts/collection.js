@@ -1,16 +1,21 @@
+let likedSongsCache = [];
+
 async function toonMijnCollectie() {
   const res = await fetch("/collection/api/liked");
-  const likedSongs = await res.json();
+  likedSongsCache = await res.json();
+  renderCollection(likedSongsCache);
+}
 
+function renderCollection(list) {
   const container = document.getElementById("collection-container");
   container.innerHTML = "";
 
-  if (!likedSongs.length) {
+  if (!list.length) {
     container.innerHTML = "<p>Geen favorieten 😢</p>";
     return;
   }
 
-  likedSongs.forEach((track) => {
+  list.forEach((track) => {
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -32,5 +37,17 @@ async function toonMijnCollectie() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", toonMijnCollectie);
+document.getElementById("searchForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
+  const query = document.getElementById("search").value.toLowerCase();
+
+  const filtered = likedSongsCache.filter((track) =>
+    track.name.toLowerCase().includes(query) ||
+    track.artist.toLowerCase().includes(query)
+  );
+
+  renderCollection(filtered);
+});
+
+document.addEventListener("DOMContentLoaded", toonMijnCollectie);
