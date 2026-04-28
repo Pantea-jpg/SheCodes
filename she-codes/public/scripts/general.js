@@ -6,7 +6,7 @@ const infoModal = document.querySelector("#infoModal");
 const learnMore = document.querySelector("#learn-more");
 const modalContent = document.querySelector(".modal-content");
 
-if (!window.location.pathname.includes("landingPage.ejs")) {
+if (window.location.pathname !== "/") {
   logo.addEventListener("click", () => {
     window.location.href = "/search";
   });
