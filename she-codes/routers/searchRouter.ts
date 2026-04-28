@@ -42,7 +42,7 @@ export function searchPageRouter() {
       ];
 
       mixedResults.sort(() => Math.random() - 0.5);
-
+      
       res.render("searchPage", {
         results: mixedResults,
         artists,
