@@ -1,149 +1,155 @@
 header {
-    background-color: var(--bg);
-    height: 80px;
+  background-color: var(--bg);
+  height: 80px;
 }
 
-body{
-    background-color: var(--secondary);
-    font-family: var(--main-font);
-    color: var(--text);
+body {
+  background-color: var(--secondary);
+  font-family: var(--main-font);
+  color: var(--text);
 }
 
 main {
-    padding: 30px;
-    margin-left: 50px;
+  padding: 30px;
+  margin-left: 50px;
 }
+
 .left {
-   display: flex;
-   justify-content: left;
-   gap: 5px;
-   align-items: center;
+  display: flex;
+  justify-content: left;
+  gap: 5px;
+  align-items: center;
 }
 
 .title {
-     margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
 h1 {
-    font-size: 3rem;
-    margin: 0;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.Mood {
-background-color: var(--light);
- text-align: center;
- margin-left: 10px;
- font-size: 1rem;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-
+  font-size: 3rem;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  flex: 0 0 50px;   /* verhindert Flex-Stretching */
-  overflow: hidden; /* verhindert, dass Inhalt den Kreis vergrößert */
+.Mood {
+  background-color: var(--light);
+  text-align: center;
+  margin-left: 10px;
+  font-size: 1rem;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 50px;
+  overflow: hidden;
 }
 
 form {
-    background-color: var(--light);
-    border: 1px solid var(--text);
-    max-width: 300px;
-    border-radius: 10px;
-    height: 30px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    position: relative;
+  background-color: var(--light);
+  border: 1px solid var(--text);
+  max-width: 300px;
+  border-radius: 10px;
+  height: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.sort{
-    position:relative; 
+.sort {
+  position: relative;
 }
 
-
-
-select{
+select {
   width: 100%;
   padding: 5px 10px;
- border-radius: 10px;
+  border-radius: 10px;
   background: var(--light);
   color: var(--text);
 }
 
 label {
-    padding: 2px;
+  padding: 2px;
 }
 
-
-
-.Songlist {
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px
+#collection-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1000px;
+  margin: auto;
 }
 
-article {
-    display: flex;
-    flex-direction: row;
-   
-    gap: 10px;
-    width: 400px;
-    height: 200px;
-    background-color: var(--secondary);
-    padding: 20px;
-    border-radius: 15px;
+.card {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: auto auto auto;
+  background-color: rgb(87, 86, 184);
+  width: 150px;
+  height: 240px;
+  border-radius: 10px;
+  position: relative;
 }
 
-figure {
-    border-radius: 10px;
-    margin:0;
-    width: 100%;
-    height: 200px;
+.img {
+  position: relative;
 }
 
-h2 {
-    font-size: 1.5rem;
-    margin:0;
+.img img {
+  background-color: #fff7cd;
+  width: 120px;
+  height: 120px;
+  margin-top: 5px;
+  border-radius: 50%;
 }
 
-
-article button {
-    font-size: 20px;
-    padding: 0;
-    position: absolute;
-    top: 10px;
-    left: 360px;
+.card-info h2,
+.card-info p {
+  font-size: 15px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 120px;
+  display: block;
 }
 
-article > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
+.liked {
+  display: inline-block;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
-article {
-    position: relative;
+
+.liked.active {
+  color: red;
+  transform: scale(1.2);
+}
+
+.card button {
+  font-size: 10px;
+  width: 140px;
+  height: 30px;
 }
 
 @media (max-width: 600px) {
-
   main {
     margin-left: 0;
     padding: 20px;
   }
 
-  /* Titelbereich untereinander statt nebeneinander */
   .title {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -162,16 +168,9 @@ article {
     height: 40px;
     width: 40px;
     font-size: 0.9rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
     flex: 0 0 40px;
-    overflow: hidden;
   }
 
-  /* Formulare auf volle Breite */
   form {
     max-width: 100%;
     width: 100%;
@@ -182,27 +181,7 @@ article {
     width: 100%;
   }
 
-  /* Songliste einspaltig */
-  .Songlist {
-    grid-template-columns: 1fr;
-  }
-
-  /* Artikel kompakter */
-  article {
-    width: 100%;
-    height: auto;
+  #collection-container {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  figure {
-    width: 120px;
-    height: 120px;
-  }
-
-  article button {
-    top: 10px;
-    right: 10px;
   }
 }

@@ -11,19 +11,21 @@ async function toonMijnCollectie() {
   }
 
   likedSongs.forEach((track) => {
-    const card = document.createElement("article");
+    const card = document.createElement("div");
+    card.classList.add("card");
 
     card.innerHTML = `
-      <div class="card">
-        <img src="${track.image}" alt="cover" />
-
-        <div class="info">
-          <h2>${track.name}</h2>
-          <p>${track.artist}</p>
-        </div>
-
-        <button class="heart">❤️</button>
+      <div class="img">
+        <span class="liked active">❤</span>
+        <img src="${track.image}" alt="${track.name}">
       </div>
+
+      <div class="card-info">
+        <h2>${track.name}</h2>
+        <p>${track.artist}</p>
+      </div>
+
+      <button class="play-preview">▶ Preview</button>
     `;
 
     container.appendChild(card);
@@ -31,3 +33,4 @@ async function toonMijnCollectie() {
 }
 
 document.addEventListener("DOMContentLoaded", toonMijnCollectie);
+
