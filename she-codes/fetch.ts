@@ -164,14 +164,14 @@ export async function getTopTracks(
   }));
 }
 
-export async function getFullArtistData(
-  artistName: string,
-): Promise<FullArtistData> {
-  const artist = await getArtistInfo(artistName);
-  const { albums } = await getArtistAlbums(artist.mbid, { limit: 5 });
-  const topTracks = await getTopTracks(artistName, 5);
-  return { artist, albums, topTracks };
-}
+// export async function getFullArtistData(
+//   artistName: string,
+// ): Promise<FullArtistData> {
+//   const artist = await getArtistInfo(artistName);
+//   const { albums } = await getArtistAlbums(artist.mbid, { limit: 5 });
+//   const topTracks = await getTopTracks(artistName, 5);
+//   return { artist, albums, topTracks };
+// }
 
 function msToTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
@@ -340,4 +340,43 @@ export async function getTrackPreviewFromiTunes(query: string) {
   const track = data.results?.[0];
 
   return track?.previewUrl || null;
+}
+//NEW
+export async function getArtistInfoByMbid(mbid: string): Promise<ArtistInfo> {
+  const mbArtist = await mbFetch<MbArtist>(`${MB_BASE}/artist/${mbid}?fmt=json`);
+
+  const lfmData = await lfmFetch<{
+    artist: {
+      stats?: { listeners: string; playcount: string };
+      bio?: { summary: string };
+      image?: { size: string; "#text": string }[];
+    };
+  }>({
+    method: "artist.getInfo",
+    artist: mbArtist.name,
+  });
+
+  const lfm = lfmData.artist;
+
+  return {
+    mbid: mbArtist.id,
+    name: mbArtist.name,
+    country: mbArtist.country ?? null,
+    type: mbArtist.type ?? null,
+    formed: mbArtist["life-span"]?.begin ?? null,
+    disbanded: mbArtist["life-span"]?.end ?? null,
+    tags: mbArtist.tags?.map((t) => t.name) ?? [],
+    listeners: parseInt(lfm?.stats?.listeners ?? "0"),
+    totalPlays: parseInt(lfm?.stats?.playcount ?? "0"),
+    bio: lfm?.bio?.summary?.replace(/<a[^>]*>.*?<\/a>/g, "").trim() ?? null,
+    imageUrl:
+      lfm?.image?.find((i) => i.size === "extralarge")?.["#text"] ?? null,
+  };
+}
+export async function getFullArtistData(mbid: string): Promise<FullArtistData> {
+  const artist = await getArtistInfoByMbid(mbid);
+  const { albums } = await getArtistAlbums(mbid, { limit: 5 });
+  const topTracks = await getTopTracks(artist.name, 5);
+
+  return { artist, albums, topTracks };
 }

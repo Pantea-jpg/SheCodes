@@ -46,7 +46,7 @@ document.addEventListener("click", (e) => {
     // Zelfde knop → stoppen
     if (currentButton === btn && currentAudio) {
       currentAudio.pause();
-      btn.textContent = "▶";
+      btn.textContent = "🎵";
       currentAudio = null;
       currentButton = null;
       return;
@@ -55,7 +55,7 @@ document.addEventListener("click", (e) => {
     // Andere audio speelt → stoppen
     if (currentAudio) {
       currentAudio.pause();
-      if (currentButton) currentButton.textContent = "▶";
+      if (currentButton) currentButton.textContent = "🎵";
     }
 
     // Nieuwe audio starten
@@ -66,7 +66,7 @@ document.addEventListener("click", (e) => {
     currentButton = btn;
 
     currentAudio.onended = () => {
-      btn.textContent = "▶";
+      btn.textContent = "🎵";
       currentAudio = null;
       currentButton = null;
     };
