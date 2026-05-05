@@ -22,10 +22,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   margin-top: 40px;
-  margin-left: 100px;
-  margin-right: 40px;
   height: 80px;
   border-radius: 10px;
 }
@@ -73,7 +70,7 @@ input {
 
 #filter-container {
   display: flex;
-  margin: 20px;
+  margin: 20px 0px;
   border-bottom: 1px solid black;
 }
 
@@ -99,6 +96,18 @@ input {
 
 .search-result {
   justify-items: center;
+}
+.search-result-h2 {
+  width: 640px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid rgb(6, 39, 110);
+  background-color: rgb(174, 206, 250);
 }
 
 .result-item {
@@ -325,7 +334,7 @@ main {
     display: flex;
     justify-content: center;
     margin-right: 100px;
-    min-width: 350px;
+    width: 700px;
   }
   form {
     display: flex;
