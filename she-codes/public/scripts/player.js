@@ -1,4 +1,3 @@
-
 const audio = new Audio();
 audio.volume = 0.8;
 
@@ -18,7 +17,7 @@ const coverArt = document.querySelector(".cover-art");
 const PLAY_ICON = `<polygon points="5 3 19 12 5 21 5 3"/>`;
 const PAUSE_ICON = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
 
-// Wire up every .play-btn on the page 
+// Wire up every .play-btn on the page
 document.querySelectorAll(".play-btn[data-url]").forEach((btn) => {
   btn.addEventListener("click", () => handlePlayBtn(btn));
 });
@@ -48,7 +47,7 @@ function handlePlayBtn(btn) {
 }
 
 function loadTrack({ url, name, artist, img }) {
-  document.getElementById('sticky-player').style.display = 'flex';
+  document.getElementById("sticky-player").style.display = "flex";
   if (!url) {
     showNoPreview();
     return;
@@ -134,3 +133,9 @@ function showNoPreview() {
 }
 
 document.querySelector(".sticky-player").style.display = "flex";
+document.getElementById("close-player")?.addEventListener("click", () => {
+  audio.pause();
+  isPlaying = false;
+  setPlayIcon(false);
+  document.getElementById("sticky-player").style.display = "none";
+});
