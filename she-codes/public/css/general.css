@@ -31,7 +31,7 @@ h1 {
 }
 .logo {
   img {
-    width: 300px;
+    /* width: 300px; */
     height: 220px;
   }
 }
@@ -88,9 +88,9 @@ nav a:hover {
     font-size: 1rem;
   }
 
-  .logo img {
+  /* .logo img {
     width: 200px;
-  }
+  } */
   nav {
     flex-direction: column;
     gap: 10px;
