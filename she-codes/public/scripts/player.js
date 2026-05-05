@@ -1,5 +1,3 @@
-// public/scripts/player.js
-// Connects .play-btn buttons (data-url) to the sticky player at the bottom
 
 const audio = new Audio();
 audio.volume = 0.8;
@@ -7,7 +5,6 @@ audio.volume = 0.8;
 let currentBtn = null;
 let isPlaying = false;
 
-// ── DOM refs ──────────────────────────────────────────────────────────────────
 const trackNameEl = document.getElementById("track-name");
 const artistNameEl = document.getElementById("artist-name");
 const playBtnEl = document.getElementById("play-btn");
@@ -17,11 +14,11 @@ const progressBar = document.getElementById("progress-bar");
 const curTimeEl = document.getElementById("cur-time");
 const coverArt = document.querySelector(".cover-art");
 
-// ── Icons ─────────────────────────────────────────────────────────────────────
+//Icons
 const PLAY_ICON = `<polygon points="5 3 19 12 5 21 5 3"/>`;
 const PAUSE_ICON = `<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>`;
 
-// ── Wire up every .play-btn on the page ───────────────────────────────────────
+// Wire up every .play-btn on the page 
 document.querySelectorAll(".play-btn[data-url]").forEach((btn) => {
   btn.addEventListener("click", () => handlePlayBtn(btn));
 });
@@ -40,18 +37,18 @@ function handlePlayBtn(btn) {
       ?.textContent?.trim() ?? "—";
   const img = btn.closest(".track-item")?.querySelector("img")?.src ?? null;
 
-  // Clicking same track → toggle play/pause
+  // Clicking same track ===== toggle play/pause
   if (currentBtn === btn) {
     togglePlayPause();
     return;
   }
 
-  // New track
   currentBtn = btn;
   loadTrack({ url, name, artist, img });
 }
 
 function loadTrack({ url, name, artist, img }) {
+  document.getElementById('sticky-player').style.display = 'flex';
   if (!url) {
     showNoPreview();
     return;
@@ -91,7 +88,7 @@ function togglePlayPause() {
 // Sticky player play/pause button
 playBtnEl?.addEventListener("click", togglePlayPause);
 
-// ── Progress bar ──────────────────────────────────────────────────────────────
+//Progress bar
 audio.addEventListener("timeupdate", () => {
   if (!audio.duration) return;
   const pct = (audio.currentTime / audio.duration) * 100;
@@ -113,7 +110,6 @@ progressBar?.addEventListener("click", (e) => {
   audio.currentTime = pct * audio.duration;
 });
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 function setPlayIcon(playing) {
   if (!playIconEl) return;
   playIconEl.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
@@ -136,3 +132,5 @@ function showNoPreview() {
   trackNameEl.textContent = "Geen preview beschikbaar";
   artistNameEl.textContent = "—";
 }
+
+document.querySelector(".sticky-player").style.display = "flex";

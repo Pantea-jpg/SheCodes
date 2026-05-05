@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/sidemenu.css" />
     <link rel="stylesheet" href="./css/player.css" />
     <script type="module" src="./scripts/search.js"></script>
-    <script type="module" src="./scripts/sidemenu.js"></script>
+    <script type="module" src="./scripts/sidemenu.js" defer></script>
     <script type="module" src="./scripts/general.js"></script>
     <script type="module" src="./scripts/player.js" defer></script>
 
@@ -49,6 +49,9 @@
     <p>Made with ❤️ for music lovers</p>
   </div>
 </div>
+
+    <div id="overlay" class="overlay"></div>
+
     
       <header class="header">
         <div class="logo">
@@ -189,8 +192,10 @@
 </div>
 </section>
   <% } %>
-  <div class="sticky-player">
+  <div class="sticky-player" id="sticky-player">
     <div class="player-inner">
+    <button id="close-player" onclick="document.querySelector('.sticky-player').style.display='none'">×</button>
+
  
       <div class="track-info">
         <div class="cover-art">
