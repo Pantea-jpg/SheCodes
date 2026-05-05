@@ -9,6 +9,7 @@ body {
 #results {
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
   align-items: center;
   justify-items: center;
   justify-content: center;
@@ -131,7 +132,7 @@ input {
   display: block;
 }
 
- .track-title p {
+.track-title p {
   width: 100px;
   white-space: nowrap;
   overflow: hidden;
@@ -151,7 +152,7 @@ main {
   top: 0;
   z-index: 100;
   background-color: #1a2ca3;
-  height: 309px;
+  height: 100%;
 }
 
 .image {
@@ -229,6 +230,8 @@ main {
   border-radius: 12px;
   font-size: 18px;
   color: white;
+  width: 20%;
+  text-align: center;
   display: block;
   margin: 20px auto;
   cursor: pointer;
@@ -244,10 +247,11 @@ main {
   color: aliceblue;
 }
 
-.play-btn,.youtube-btn  {
+.play-btn,
+.youtube-btn {
   width: 60px;
   height: 30px;
-  background-color: rgb(24, 28, 109);;
+  background-color: rgb(24, 28, 109);
   border-radius: 6px;
   border: 2px solid rgb(70, 70, 156);
   color: #fff;
