@@ -158,9 +158,6 @@
 }
 
 .play-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
   background: rgb(24, 28, 109);
   border: none;
   cursor: pointer;
