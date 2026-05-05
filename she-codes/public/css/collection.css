@@ -36,23 +36,10 @@ h1 {
   align-items: center;
 }
 
-.Mood {
-  background-color: var(--light);
-  text-align: center;
-  margin-left: 10px;
-  font-size: 1rem;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 50px;
-  overflow: hidden;
-}
+
 
 form {
-  background-color: var(--light);
+  background-color: rgb(174, 206, 250);
   border: 1px solid var(--text);
   max-width: 300px;
   border-radius: 10px;
@@ -72,9 +59,10 @@ select {
   width: 100%;
   padding: 5px 10px;
   border-radius: 10px;
+  border: none;
   background: var(--light);
   color: var(--text);
-  background-color: ;
+  background-color: rgb(174, 206, 250);
 }
 
 label {
@@ -103,9 +91,11 @@ label {
 }
 .search {
   border: 1px solid var(--text);
-  
- 
 }
+input {
+color: black;
+}
+
 #search {
 padding-left: 5px;
 }
@@ -174,12 +164,7 @@ padding-left: 5px;
     font-size: 2rem;
   }
 
-  .Mood {
-    height: 40px;
-    width: 40px;
-    font-size: 0.9rem;
-    flex: 0 0 40px;
-  }
+  
 
   form {
     max-width: 100%;
