@@ -89,6 +89,30 @@ label {
   border-radius: 10px;
   position: relative;
 }
+.card button {
+  background-color: rgb(24, 28, 109);
+  padding: 10px 10px 10px 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  border: 2px solid rgb(70, 70, 156);
+  width: 140px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.card button:hover {
+  background-color: rgb(44, 43, 124);
+  transform: translateY(2px);
+}
+
+
 .search {
   border: 1px solid var(--text);
 }
@@ -99,6 +123,24 @@ color: black;
 #search {
 padding-left: 5px;
 }
+.card.removing {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.liked {
+  transition: color 0.2s ease;
+}
+
+.liked.active {
+  color: red;
+}
+
+.liked:not(.active) {
+  color: white;
+}
+
 
 .img {
   position: relative;
