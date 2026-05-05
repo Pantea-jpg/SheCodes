@@ -74,6 +74,7 @@ select {
   border-radius: 10px;
   background: var(--light);
   color: var(--text);
+  background-color: ;
 }
 
 label {
