@@ -36,23 +36,10 @@ h1 {
   align-items: center;
 }
 
-.Mood {
-  background-color: var(--light);
-  text-align: center;
-  margin-left: 10px;
-  font-size: 1rem;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 50px;
-  overflow: hidden;
-}
+
 
 form {
-  background-color: var(--light);
+  background-color: rgb(174, 206, 250);
   border: 1px solid var(--text);
   max-width: 300px;
   border-radius: 10px;
@@ -72,9 +59,10 @@ select {
   width: 100%;
   padding: 5px 10px;
   border-radius: 10px;
+  border: none;
   background: var(--light);
   color: var(--text);
-  background-color: ;
+  background-color: rgb(174, 206, 250);
 }
 
 label {
@@ -101,14 +89,58 @@ label {
   border-radius: 10px;
   position: relative;
 }
+.card button {
+  background-color: rgb(24, 28, 109);
+  padding: 10px 10px 10px 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  border: 2px solid rgb(70, 70, 156);
+  width: 140px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.card button:hover {
+  background-color: rgb(44, 43, 124);
+  transform: translateY(2px);
+}
+
+
 .search {
   border: 1px solid var(--text);
-  
- 
 }
+input {
+color: black;
+}
+
 #search {
 padding-left: 5px;
 }
+.card.removing {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.liked {
+  transition: color 0.2s ease;
+}
+
+.liked.active {
+  color: red;
+}
+
+.liked:not(.active) {
+  color: white;
+}
+
 
 .img {
   position: relative;
@@ -174,12 +206,7 @@ padding-left: 5px;
     font-size: 2rem;
   }
 
-  .Mood {
-    height: 40px;
-    width: 40px;
-    font-size: 0.9rem;
-    flex: 0 0 40px;
-  }
+  
 
   form {
     max-width: 100%;
