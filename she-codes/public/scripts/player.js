@@ -1,6 +1,7 @@
 const audio = new Audio();
 audio.volume = 0.8;
-
+const stickyPlayer = document.getElementById("sticky-player");
+stickyPlayer.style.display = "none";
 let currentBtn = null;
 let isPlaying = false;
 
@@ -132,7 +133,7 @@ function showNoPreview() {
   artistNameEl.textContent = "—";
 }
 
-document.querySelector(".sticky-player").style.display = "flex";
+// document.querySelector(".sticky-player").style.display = "flex";
 document.getElementById("close-player")?.addEventListener("click", () => {
   audio.pause();
   isPlaying = false;
