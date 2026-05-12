@@ -27,15 +27,13 @@ function clearState(input) {
   if (span) span.textContent = "";
 }
 
-
 const fname = document.getElementById("fname");
 const lname = document.getElementById("lname");
-const username = document.getElementById("username");
+
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirm = document.getElementById("confirm");
 const form = document.querySelector("form");
-
 
 function validateFname() {
   if (!fname.value.trim()) {
@@ -52,24 +50,6 @@ function validateLname() {
     return false;
   }
   showOk(lname);
-  return true;
-}
-
-function validateUsername() {
-  const v = username.value.trim();
-  if (!v) {
-    showError(username, "Gebruikersnaam is verplicht.");
-    return false;
-  }
-  if (v.length < 3) {
-    showError(username, "Minimaal 3 tekens.");
-    return false;
-  }
-  if (!/^[a-zA-Z0-9_]+$/.test(v)) {
-    showError(username, "Alleen letters, cijfers en _.");
-    return false;
-  }
-  showOk(username);
   return true;
 }
 
@@ -123,7 +103,6 @@ function validateConfirm() {
   return true;
 }
 
-
 fname.addEventListener("blur", validateFname);
 fname.addEventListener("input", () =>
   fname.value.trim() ? validateFname() : clearState(fname),
@@ -132,11 +111,6 @@ fname.addEventListener("input", () =>
 lname.addEventListener("blur", validateLname);
 lname.addEventListener("input", () =>
   lname.value.trim() ? validateLname() : clearState(lname),
-);
-
-username.addEventListener("blur", validateUsername);
-username.addEventListener("input", () =>
-  username.value.trim() ? validateUsername() : clearState(username),
 );
 
 email.addEventListener("blur", validateEmail);
@@ -154,12 +128,10 @@ confirm.addEventListener("input", () =>
   confirm.value ? validateConfirm() : clearState(confirm),
 );
 
-
 form.addEventListener("submit", function (e) {
   const valid =
     validateFname() &
     validateLname() &
-    validateUsername() &
     validateEmail() &
     validatePassword() &
     validateConfirm();

@@ -50,13 +50,20 @@ body {
 
 .field input.input-error {
   border-color: #c0392b;
-  background-color: rgba(221, 66, 66, 0.05);
   box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+}
+
+.error-message {
+  background-color: #ffe5e5;
+  color: #cc0000;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .field input.input-ok {
   border-color: #27ae60;
-  background-color: rgba(39, 174, 96, 0.04);
   box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
 }
 
@@ -120,6 +127,7 @@ body {
 }
 
 .register-btn {
+  margin-top: 10px;
   width: 100%;
   padding: 12px;
   border-radius: 8px;

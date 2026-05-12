@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="fa" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/register.css" />
     <link rel="stylesheet" href="/css/general.css" />
     <script type="module" src="/scripts/register.js"></script>
+    <script type="module" src="/scripts/general.js"></script>
     <title>Register — MusicApp</title>
   </head>
   <body>
@@ -25,6 +26,11 @@
     <div class="main-content">
       <div class="register-card">
         <h2 class="card-title">Een account aanmaken</h2>
+        <% if (error) { %>
+        <div class="error-message">
+         <%= error %>
+         </div>
+        <% } %>
         <p class="card-subtitle">Doe met ons mee</p>
 
         <form action="/register" method="post">
@@ -38,17 +44,7 @@
               type="text"
               id="lname"
               placeholder="Khodabakhsh"
-              name="fname"
-            />
-          </div>
-
-          <div class="field">
-            <label for="username">Gebruikersnaam</label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Pantea_78"
-              name="username"
+              name="lname"
             />
           </div>
 
@@ -82,7 +78,7 @@
             />
           </div>
 
-          <button class="register-btn" type="submit" onclick="handleRegister()">
+          <button class="register-btn" type="submit"">
             Create Account
           </button>
         </form>

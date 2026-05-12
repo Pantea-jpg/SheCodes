@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface ArtistInfo {
   mbid: string;
   name: string;
@@ -71,4 +73,13 @@ export interface MbTrack {
 
 export interface MbMedia {
   tracks?: MbTrack[];
+}
+
+export interface User {
+  id?: ObjectId;
+  fname: string;
+  lname: string;
+  email: string;
+  password?: string;
+  role?: "ADMIN" | "USER";
 }
