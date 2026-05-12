@@ -34,44 +34,44 @@ document.getElementById("filter-tracks").addEventListener("click", () => {
   filterResults("track");
 });
 
-let currentAudio = null;
-let currentButton = null;
-//NEW
+// let currentAudio = null;
+// let currentButton = null;
+// //NEW
+// document.addEventListener("click", (e) => {
+//   // PREVIEW BUTTON
+//   if (e.target.classList.contains("play-btn")) {
+//     const btn = e.target;
+//     const url = btn.dataset.url;
+
+//     // Zelfde knop → stoppen
+//     if (currentButton === btn && currentAudio) {
+//       currentAudio.pause();
+//       btn.textContent = "🎵";
+//       currentAudio = null;
+//       currentButton = null;
+//       return;
+//     }
+
+//     // Andere audio speelt → stoppen
+//     if (currentAudio) {
+//       currentAudio.pause();
+//       if (currentButton) currentButton.textContent = "🎵";
+//     }
+
+//     // Nieuwe audio starten
+//     currentAudio = new Audio(url);
+//     currentAudio.play();
+
+//     btn.textContent = "⏸";
+//     currentButton = btn;
+
+//     currentAudio.onended = () => {
+//       btn.textContent = "🎵";
+//       currentAudio = null;
+//       currentButton = null;
+//     };
+//   }
 document.addEventListener("click", (e) => {
-  // PREVIEW BUTTON
-  if (e.target.classList.contains("play-btn")) {
-    const btn = e.target;
-    const url = btn.dataset.url;
-
-    // Zelfde knop → stoppen
-    if (currentButton === btn && currentAudio) {
-      currentAudio.pause();
-      btn.textContent = "🎵";
-      currentAudio = null;
-      currentButton = null;
-      return;
-    }
-
-    // Andere audio speelt → stoppen
-    if (currentAudio) {
-      currentAudio.pause();
-      if (currentButton) currentButton.textContent = "🎵";
-    }
-
-    // Nieuwe audio starten
-    currentAudio = new Audio(url);
-    currentAudio.play();
-
-    btn.textContent = "⏸";
-    currentButton = btn;
-
-    currentAudio.onended = () => {
-      btn.textContent = "🎵";
-      currentAudio = null;
-      currentButton = null;
-    };
-  }
-
   if (e.target.classList.contains("youtube-btn")) {
     const videoId = e.target.dataset.video;
 

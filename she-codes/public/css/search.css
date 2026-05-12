@@ -58,6 +58,11 @@ input {
   width: 700px;
   box-shadow: 0 4px 10px rgba(223, 223, 223, 0.2);
 }
+
+.home-card p {
+  color: white;
+}
+
 .result-info {
   display: flex;
   gap: 10px;
@@ -327,15 +332,16 @@ main {
   cursor: pointer;
 }
 
-@media (min-width: 601px) and (max-width: 1024px) {
-  /* #results {
-    min-width: 500px;
-  } */
-  /* .result-item {
-    gap: 70px;
-  } */
+@media (min-width: 601px) and (max-width: 1390px) {
+ 
+  .ad {
+    display: none;
+  }
 }
 @media (max-width: 600px) {
+  .ad {
+    display: none;
+  }
   #filter-container {
     margin: 10px auto;
   }
