@@ -173,9 +173,7 @@ input {
 }
 
 main {
-  /* position: sticky; */
-  /* top: 0; */
-  /* z-index: 100; */
+
   background-color: #1a2ca3;
   height: 100%;
 }

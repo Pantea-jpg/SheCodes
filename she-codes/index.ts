@@ -7,6 +7,7 @@ import { generatorRouter } from "./routers/generatorRouter";
 import { collectionRouter } from "./routers/collectionRouter";
 import { detailPageRouter } from "./routers/detailPageRouter";
 import { loginPage } from "./routers/login";
+import { registerPage } from "./routers/register";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use("/generator", generatorRouter());
 app.use("/collection", collectionRouter());
 app.use("/detail", detailPageRouter());
 app.use("/login", loginPage());
+app.use("/register", registerPage());
 
 app.get("/", (req, res) => {
   res.render("landingPage");

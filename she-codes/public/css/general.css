@@ -7,15 +7,10 @@
   --main-font: Arial, sans-serif;
 }
 
-/* html,
-body {
-  height: 100vh;
-} */
 
 body {
   width: 100%;
   font-family: var(--main-font);
-  /* background: linear-gradient(180deg, var(--light), var(--secondary)); */
 }
 h1 {
   font-size: 1.7rem;
