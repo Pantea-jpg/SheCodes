@@ -1,6 +1,11 @@
 body {
   display: grid;
 }
+/* body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+} */
 
 .filter-search {
   display: grid;
@@ -73,7 +78,16 @@ input {
   border-radius: 10px;
   margin-bottom: 5px;
 }
-
+.no-results {
+  background-color: rgb(6, 39, 110);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 20px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 #filter-container {
   display: flex;
   margin: 20px 0px;
@@ -178,7 +192,6 @@ input {
 }
 
 main {
-
   background-color: #1a2ca3;
   height: 100%;
 }
@@ -331,9 +344,14 @@ main {
 .youtube-btn {
   cursor: pointer;
 }
-
+#results {
+  min-height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
 @media (min-width: 601px) and (max-width: 1390px) {
- 
   .ad {
     display: none;
   }

@@ -124,8 +124,11 @@
   <div class="home-row">
   <% artists.forEach(a => { %>
     <div class="home-card">
+     
+      <a href="/search?q=<%= a.name %>">
       <img src="<%= a.image %>" class="home-img round">
       <p><%= a.name %></p>
+       </a>
     </div>
   <% }) %>
 </div>
@@ -135,8 +138,10 @@
 
   <% tracks.forEach(t => { %>
     <div class="home-card">
+        <a href="/search?q=<%= t.name %>">
       <img src="<%= t.image %>" class="home-img round">
       <p><%= t.name %></p>
+      </a>
     </div>
   <% }) %>
       </div>
@@ -151,7 +156,12 @@
     </div>
 
 <div id="results">
-  
+  <% if (results.length === 0) { %>
+  <div class="no-results">
+    <h2>😢 Geen resultaten gevonden</h2>
+    <p>Probeer een andere artiest of nummer.</p>
+  </div>
+<% }else{ %>
   <% results.forEach(item => { %>
 
     <div class="result-item" data-type="<%= item.type %>">
@@ -184,11 +194,13 @@
             <!-- <a href="/detail/<%= item.data.id %>?q=<%= q %>" class="details-btn">Details</a> -->
           </div>
         </div>
+        
       <% } %>
 
     </div>
 
   <% }) %>
+   <% } %> 
 </div>
 </section>
   <% } %>
