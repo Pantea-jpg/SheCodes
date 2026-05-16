@@ -1,29 +1,35 @@
-// const mongoStore = MongoStore.create({
-//   mongoUrl: MONGO_URI,
-//   dbName: "project",
-//   collectionName: "sessions",
-// });
+import dotenv from "dotenv";
+dotenv.config();
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import { User } from "./interfaces/interface";
 
-// mongoStore.on("error", (error) => {
-//   console.log(error);
-// });
+const mongoStore = MongoStore.create({
+  mongoUrl: process.env.MONGODB_URI,
+  dbName: "team-project",
+  collectionName: "sessions",
+});
 
-// declare module "express-session" {
-//   export interface SessionData {
-//     user?: User;
-//     message: {
-//       text: string;
-//       success: boolean;
-//     };
-//   }
-// }
+mongoStore.on("error", (error) => {
+  console.log(error);
+});
 
-// export default session({
-//     secret: process.env.SESSION_SECRET ?? "my-project-secret",
-//     store: mongoStore,
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: {
-//         maxAge: 1000 * 60 * 60 * 24 * 7
-//     }
-// });
+declare module "express-session" {
+  export interface SessionData {
+    user?: User;
+    message: {
+      text: string;
+      success: boolean;
+    };
+  }
+}
+
+export default session({
+  secret: process.env.SESSION_SECRET ?? "my-project-secret",
+  store: mongoStore,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+});
