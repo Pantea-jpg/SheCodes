@@ -5,9 +5,15 @@ import { User } from "../interfaces/interface";
 export function registerPage() {
   const router = express.Router();
   router.get("/", async (req, res) => {
+    if (req.session.user) {
+      return res.redirect("/search");
+    }
     res.render("register", { error: "" });
   });
   router.post("/", async (req, res) => {
+    if (req.session.user) {
+      return res.redirect("/search");
+    }
     try {
       const { fname, lname, email, password } = req.body;
 

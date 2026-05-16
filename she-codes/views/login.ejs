@@ -11,8 +11,8 @@
   <div class="login-container">
   
     <h2>Inloggen</h2>
-    <% if (typeof error !== "undefined") { %>
-      <div class="error"><%= error %></div>
+    <% if (!message.success) { %>
+      <div class="error"><%= message.text %></div>
     <% } %>
 
     <form action="/login" method="post">

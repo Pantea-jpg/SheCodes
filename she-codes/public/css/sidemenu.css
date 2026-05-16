@@ -83,8 +83,13 @@
   align-items: stretch;
   gap: 10px;
 }
-
-.nav-item {
+#logout {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.nav-item,
+#logout {
   text-decoration: none;
   color: #ccc;
   padding: 12px 14px;
