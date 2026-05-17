@@ -28,6 +28,11 @@ main {
   margin-top: 50px;
 }
 
+#logout {
+  background-color: var(--bg);
+  color: #ffff;
+}
+
 .projects-containers {
   width: 75%;
   display: flex;

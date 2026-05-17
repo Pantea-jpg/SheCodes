@@ -28,7 +28,11 @@
         <a class="nav-item" href="/collection" id="myCollection"
           >💿 Mijn collectie</a
         >
-        <a class="nav-item" href="/login" id="openLogin">🔐 Uitloggen</a>
+        <form action="/logout" method="post">
+          <button class="nav-item" id="logout" type="submit">
+            🔐 Uitloggen
+          </button>
+        </form>
       </nav>
 
       <div class="side-menu-user">
@@ -56,7 +60,9 @@
         />
       </div>
       <nav>
-        <a id="login" href="/login">Uitloggen</a>
+        <form action="/logout" method="post">
+          <button id="logout" type="submit">Uitloggen</button>
+        </form>
         <a id="learn-more" href="#">Leer meer</a>
       </nav>
     </header>
@@ -71,15 +77,13 @@
             <option value="name">Titel</option>
             <option value="artist">Artist</option>
           </select>
-     
 
-        <form id="searchForm">
-          <input id="search" name="searchButton" placeholder="Search" />
-          <button type="submit">🔍</button>
-        </form>
+          <form id="searchForm">
+            <input id="search" name="searchButton" placeholder="Search" />
+            <button type="submit">🔍</button>
+          </form>
+        </div>
       </div>
-      </div>
-         
 
       <section class="Songlist" id="collection-container"></section>
 

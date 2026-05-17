@@ -7,7 +7,6 @@
   --main-font: Arial, sans-serif;
 }
 
-
 body {
   width: 100%;
   font-family: var(--main-font);
@@ -36,7 +35,8 @@ nav {
   gap: 30px;
 }
 
-nav a {
+nav a,
+nav button {
   min-width: 100px;
   height: 40px;
   border-radius: 10px;
@@ -52,8 +52,9 @@ nav a {
 
   background-color: rgb(181, 181, 195);
 }
-#login {
+#logout {
   background-color: var(--bg);
+  color: #ffff;
 }
 
 #learn-more {
