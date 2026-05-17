@@ -7,6 +7,11 @@
   --main-font: Arial, sans-serif;
 }
 
+.close-3 {
+  background: none;
+  border: none;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,6 +24,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+#login {
+  background-color: var(--bg);
+  color: #ffff;
 }
 
 .main-content {

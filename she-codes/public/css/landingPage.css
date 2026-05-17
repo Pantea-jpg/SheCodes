@@ -28,7 +28,7 @@ main {
   margin-top: 50px;
 }
 
-#logout {
+#login {
   background-color: var(--bg);
   color: #ffff;
 }
